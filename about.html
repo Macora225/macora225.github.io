@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Our Tools | YouTubeHelper Ecosystem</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --primary: #00f2ff;
+            --secondary: #ff007a;
+            --text-main: #ffffff;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            background: #05070a;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .glass-header {
+            background: rgba(5, 7, 10, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 20px;
+            border-bottom: 1px solid var(--glass-border);
+            text-align: center;
+            position: sticky; top: 0; z-index: 1000;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 50px 20px; }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        /* --- Tools Grid --- */
+        .tools-summary {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        .tool-info-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 30px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            transition: 0.3s;
+        }
+
+        .tool-info-card:hover {
+            border-color: var(--primary);
+            transform: scale(1.01);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .tool-number {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 1.2rem; flex-shrink: 0;
+        }
+
+        .tool-text h3 { margin: 0 0 10px 0; color: var(--primary); font-size: 1.5rem; }
+        .tool-text p { margin: 0; opacity: 0.8; font-size: 1rem; color: #cbd5e1; }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 80px;
+            padding: 40px;
+            border-top: 1px solid var(--glass-border);
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .hero-section h1 { font-size: 2rem; }
+            .tool-info-card { flex-direction: column; text-align: center; }
+            .tool-number { margin: 0 auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="glass-header">
+        <a href="index.html" style="color:var(--primary); text-decoration:none; font-weight:800; font-size:24px;">🚀 YouTubeHelper Ecosystem</a>
+    </header>
+
+    <div class="container">
+        <div class="hero-section">
+            <h1>Everything in One Place</h1>
+            <p>Explore our 12 powerful AI and utility tools designed for creators, marketers, and daily users.</p>
+        </div>
+
+        <div class="tools-summary">
+            <div class="tool-info-card">
+                <div class="tool-number">01</div>
+                <div class="tool-text">
+                    <h3>Multi Video Play</h3>
+                    <p>YouTube links se multiple slots mein video play karein. Yeh multitasking aur video auditing ke liye perfect hai.</p>
+                </div>
+            </div>
+
+            <div class="tool-info-card">
+                <div class="tool-number">02</div>
+                <div class="tool-text">
+                    <h3>Multi Shorts View</h3>
+                    <p>Shorts videos ke liye optimized vertical viewer. Ek hi screen par 20 tak shorts monitor karein.</p>
+                </div>
+            </div>
+
+            <div class="tool-info-card">
+                <div class="tool-number">03</div>
+                <div class="tool-text">
+                    <h3>Multi Live Stream</h3>
+                    <p>Live streams ko side-by-side chalaein. News monitoring aur live event tracking ke liye best tool.</p>
+                </div>
+            </div>
+
+            <div class="tool-info-card">
+                <div class="tool-number">04</div>
+                <div class="tool-text">
+                    <h3>Multi Browser Engine</h3>
+                    <p>Real browser interface ke saath video slots chalaein. Isme windows header aur address bar ka professional look milta hai.</p>
+                </div>
+            </div>
+
+            <div class="tool-info-card">
+                <div class="tool-number">05</div>
+                <div class="tool-text">
+                    <h3>Thumbnail Downloader & Editor</h3>
+                    <p>Kisi bhi video ka HD thumbnail download karein aur use built-in filters (Brightness, Contrast) ke saath edit karein.</p>
+                </div>
+            </div>
+
+            <div class="tool-info-card">
+                <div class="tool-number">06</div>
+                <div class="tool-text">
+                    <h3>AI SEO Generator</h3>
+                    <p>Video title se 10 alag styles mein descriptions, tags aur viral hashtags generate karein taaki video rank ho sake.</p>
+                </div>
+            </div>
+
+            <div class="tool-info-card">
+                <div class="tool-number">07</div>
+                <div class="tool-text">
+                    <h3>Channel Audit Pro</h3>
+                    <p>YouTube Data API ka use karke channel ki health check karein. Best/Lowest videos aur growth graph analyze karein.</p>
+                </div>
+            </div>
+
+            <div class="tool-info-card">
+                <div class="tool-number">08</div>
+                <div class="tool-text">
+                    <h3>Image Resize & Studio</h3>
+                    <p>Photos ko resize, crop aur filters se professional banayein. Saari editing aapke browser mein secure rehti hai.</p>
+                </div>
+            </div>
+
+            <div class="tool-info-card">
+                <div class="tool-number">09</div>
+                <div class="tool-text">
+                    <h3>Instagram Multi-Booster</h3>
+                    <p>Vertical 9:16 layout mein Instagram Reels ko multiple slots mein chalaein engagement check karne ke liye.</p>
+                </div>
+            </div>
+
+            <div class="tool-info-card">
+                <div class="tool-number">10</div>
+                <div class="tool-text">
+                    <h3>AI Insta Caption Generator</h3>
+                    <p>Gemini AI ka use karke apne post ke liye viral captions aur niche hashtags likhwayein sirf ek click mein.</p>
+                </div>
+            </div>
+
+            <div class="tool-info-card">
+                <div class="tool-number">11</div>
+                <div class="tool-text">
+                    <h3>Photo to PDF Converter</h3>
+                    <p>Multiple images upload karein, unhe drag-and-drop se arrange karein aur ek single professional PDF download karein.</p>
+                </div>
+            </div>
+
+            <div class="tool-info-card">
+                <div class="tool-number">12</div>
+                <div class="tool-text">
+                    <h3>PDF to Image Converter</h3>
+                    <p>PDF file ke har page ko high-quality PNG image mein convert karein aur separately download karein.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            <p>&copy; 2026 YouTubeHelper Ecosystem. Built for Privacy, Speed, and Creators.</p>
+            <p>All tools run 100% on the client-side for maximum security.</p>
+        </div>
+    </div>
+
+</body>
+</html>
