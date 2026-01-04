@@ -3,284 +3,218 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>YouTubeHelper | Premium Free Online Tools</title>
-     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8466110696051997"
-             crossorigin="anonymous"></script>
-   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FZBEBDN68Z"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-FZBEBDN68Z');
-</script>
-    crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     
-    <meta name="description" content="YouTubeHelper provides a premium suite of free online tools for creators and web users. Fast, secure, and completely private utilities for YouTube, PDF, and Images." />
-    <meta name="keywords" content="YouTubeHelper, Video Tools, PDF Converter, Image Resizer, YouTube Audit, Free Online Tools" />
+    <title>YouTubeHelper | All-In-One Pro Creator Tools & Digital Utilities</title>
+    <meta name="title" content="YouTubeHelper | All-In-One Pro Creator Tools & Digital Utilities">
+    <meta name="description" content="Discover YouTubeHelper, the ultimate destination for creators. Get free access to Multi YouTube Live Viewers, Shorts View Boosters, Thumbnail Makers, and advanced PDF/Image utilities. 100% Secure, browser-based tools with no registration required.">
+    <meta name="keywords" content="YouTubeHelper, multi youtube viewer, youtube shorts boost, free youtube audit, thumbnail generator, photo to pdf, image resizer, instagram ai caption, website booster, free online tools 2026">
+    <meta name="robots" content="index, follow">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://youtubehelper.github.io/">
+    <meta property="og:title" content="YouTubeHelper | Professional Tools for Modern Creators">
+    <meta property="og:description" content="Boost your YouTube workflow with our professional-grade tools. Multi-view, SEO tags generator, and high-speed web utilities.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --primary: #FF0000;
-            --primary-hover: #D90000;
-            --bg-light: #f4f7f6;
-            --card-light: #ffffff;
-            --text-light: #1a1a1b;
-            --border-light: #e1e4e8;
-            
-            /* Dark Mode colors */
-            --bg-dark: #0f1113;
-            --card-dark: #1c1f23;
-            --text-dark: #f0f2f5;
-            --border-dark: #2d3136;
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.25);
+            --primary: #FF3D3D;
+            --text-main: #ffffff;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             margin: 0;
-            background: var(--bg-light);
-            color: var(--text-light);
-            transition: all 0.3s ease;
+            background: #0f172a; /* Deep blue-black */
+            background-attachment: fixed;
+            color: var(--text-main);
+            overflow-x: hidden;
         }
 
-        body.dark-mode {
-            background: var(--bg-dark);
-            color: var(--text-dark);
+        /* --- Rain Drops Animation --- */
+        .rain-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background: linear-gradient(to bottom, #0f172a, #1e293b);
+        }
+        .drop {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            width: 1px;
+            height: 50px;
+            top: -100px;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            to { transform: translateY(110vh); }
         }
 
-        /* --- Modern Header --- */
+        /* --- Header --- */
         header {
-            background: var(--card-light);
-            border-bottom: 1px solid var(--border-light);
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
             padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            position: sticky; top: 0; z-index: 1000;
         }
-
-        body.dark-mode header {
-            background: var(--card-dark);
-            border-bottom: 1px solid var(--border-dark);
-        }
-
-        .brand {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--primary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        nav { display: flex; gap: 20px; }
-        nav a { 
-            text-decoration: none; 
-            color: inherit; 
-            font-weight: 500; 
-            font-size: 14px;
-            opacity: 0.8;
-        }
-        nav a:hover { opacity: 1; color: var(--primary); }
-
-        #theme-toggle {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 13px;
-        }
+        .brand { font-size: 26px; font-weight: 800; color: var(--primary); text-decoration: none; }
 
         /* --- Hero Section --- */
         .hero {
-            padding: 80px 20px 40px;
+            padding: 100px 20px;
             text-align: center;
-            background: linear-gradient(180deg, rgba(255,0,0,0.05) 0%, transparent 100%);
         }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; text-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .hero p { max-width: 800px; margin: 0 auto; font-size: 1.2rem; opacity: 0.9; line-height: 1.6; }
 
-        .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 15px; }
-        .hero p { max-width: 600px; margin: 0 auto; opacity: 0.7; font-size: 1.1rem; }
-
-        /* --- Tools Grid --- */
+        /* --- Glass Grid --- */
         .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
-        
-        .section-title {
-            font-size: 1.5rem;
-            margin: 50px 0 25px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .section-title { font-size: 1.8rem; margin: 60px 0 30px; text-align: left; border-left: 5px solid var(--primary); padding-left: 15px; }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
         }
 
         .tool-card {
-            background: var(--card-light);
-            border: 1px solid var(--border-light);
-            border-radius: 16px;
-            padding: 25px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px;
             text-align: center;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        body.dark-mode .tool-card {
-            background: var(--card-dark);
-            border-color: var(--border-dark);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
         .tool-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+            transform: scale(1.05) translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
             border-color: var(--primary);
         }
 
-        .tool-card h3 { margin: 0 0 20px; font-size: 1.1rem; line-height: 1.4; }
+        .tool-card h3 { font-size: 1.2rem; margin-bottom: 25px; min-height: 50px; }
 
         .btn-tool {
-            background: #f0f0f0;
-            color: #333;
-            text-decoration: none;
-            padding: 12px;
-            border-radius: 12px;
-            font-weight: 600;
-            transition: 0.2s;
-        }
-
-        body.dark-mode .btn-tool { background: #2d3136; color: #fff; }
-
-        .tool-card:hover .btn-tool {
             background: var(--primary);
             color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-weight: 700;
+            display: block;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 61, 61, 0.3);
         }
+        .btn-tool:hover { background: #ff5e5e; transform: scale(1.05); }
 
-        /* --- Content Section --- */
-        .about-content {
-            margin-top: 80px;
-            padding: 40px;
-            background: var(--card-light);
-            border-radius: 20px;
-            border: 1px solid var(--border-light);
+        /* --- Extensive Description Section --- */
+        .seo-content {
+            margin-top: 100px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 30px;
+            padding: 50px;
+            border: 1px solid var(--glass-border);
             line-height: 1.8;
         }
+        .seo-content h2 { color: var(--primary); font-size: 2rem; margin-bottom: 20px; }
+        .seo-content p { margin-bottom: 20px; color: #cbd5e1; }
 
-        body.dark-mode .about-content {
-            background: var(--card-dark);
-            border-color: var(--border-dark);
-        }
+        footer { text-align: center; padding: 60px 20px; border-top: 1px solid var(--glass-border); margin-top: 80px; opacity: 0.7; }
 
-        /* --- Footer --- */
-        footer {
-            text-align: center;
-            padding: 40px;
-            margin-top: 60px;
-            border-top: 1px solid var(--border-light);
-            opacity: 0.8;
-            font-size: 14px;
-        }
-
-        /* --- Responsive --- */
         @media (max-width: 768px) {
-            header { padding: 15px 20px; flex-direction: column; gap: 15px; }
-            .hero h1 { font-size: 1.8rem; }
-            .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-            .tool-card { padding: 15px; }
-            .tool-card h3 { font-size: 0.9rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .tool-card { padding: 20px; }
+            .tool-card h3 { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
+    <div class="rain-container" id="rain"></div>
+
     <header>
         <a href="#" class="brand">🚀 YouTubeHelper</a>
-        <nav>
-            <a href="about.html">About</a>
-            <a href="privacy.html">Privacy</a>
-            <a href="contact.html">Contact</a>
+        <nav style="display: flex; gap: 20px;">
+            <a href="about.html" style="color: white; text-decoration: none; font-size: 14px;">About</a>
+            <a href="privacy.html" style="color: white; text-decoration: none; font-size: 14px;">Privacy</a>
+            <a href="contact.html" style="color: white; text-decoration: none; font-size: 14px;">Contact</a>
         </nav>
-        <button id="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
     </header>
 
     <div class="hero">
-        <h1>Advanced Content Creator Tools</h1>
-        <p>Your all-in-one workstation for YouTube growth and digital productivity. No registration, no logs, just pure efficiency.</p>
+        <h1>YouTubeHelper Pro Suite</h1>
+        <p>The world's most elegant toolkit for content creators. Enhance your views, optimize your SEO, and manage your digital assets with high-performance glass-interface tools.</p>
     </div>
 
     <div class="container">
         
-        <h2 class="section-title">🔥 YouTube & Content Tools</h2>
+        <h2 class="section-title">🔥 YouTube Mastery Tools</h2>
         <div class="grid">
-            <div class="tool-card"><h3>Multi YouTube Live Viewer</h3><a href="multi-live.html" class="btn-tool">Open Tool</a></div>
-            <div class="tool-card"><h3>YouTube Shorts Views</h3><a href="youtube-short-preview.html" class="btn-tool">Open Tool</a></div>
-            <div class="tool-card"><h3>YouTube Video Views</h3><a href="youtube-view-checker.html" class="btn-tool">Open Tool</a></div>
-            <div class="tool-card"><h3>Multi Browser</h3><a href="multi-browser.html" class="btn-tool">Open Tool</a></div>
-            <div class="tool-card"><h3>YouTube Thumbnail</h3><a href="youtube-thumbnail.html" class="btn-tool">Open Tool</a></div>
-            <div class="tool-card"><h3>YouTube Description & Tags Generator</h3><a href="youtube-tool.html" class="btn-tool">Open Tool</a></div>
-            <div class="tool-card"><h3>YouTube Audit</h3><a href="youtube-channel-audit.html" class="btn-tool">Open Tool</a></div>
-            <div class="tool-card"><h3>Multi View</h3><a href="multi-view.html" class="btn-tool">Open Tool</a></div>
+            <div class="tool-card"><h3>Multi YouTube Live Viewer</h3><a href="multi-live.html" class="btn-tool">Launch Tool</a></div>
+            <div class="tool-card"><h3>YouTube Shorts Views</h3><a href="youtube-short-preview.html" class="btn-tool">Launch Tool</a></div>
+            <div class="tool-card"><h3>YouTube Video Views</h3><a href="youtube-view-checker.html" class="btn-tool">Launch Tool</a></div>
+            <div class="tool-card"><h3>Multi Browser Engine</h3><a href="multi-browser.html" class="btn-tool">Launch Tool</a></div>
+            <div class="tool-card"><h3>Pro Thumbnail Maker</h3><a href="youtube-thumbnail.html" class="btn-tool">Launch Tool</a></div>
+            <div class="tool-card"><h3>SEO Tags & Description</h3><a href="youtube-tool.html" class="btn-tool">Launch Tool</a></div>
+            <div class="tool-card"><h3>Channel Performance Audit</h3><a href="youtube-channel-audit.html" class="btn-tool">Launch Tool</a></div>
+            <div class="tool-card"><h3>Global Multi View</h3><a href="multi-view.html" class="btn-tool">Launch Tool</a></div>
         </div>
 
-        <h2 class="section-title">⚙️ PDF, Image & Web Utilities</h2>
+        <h2 class="section-title">⚙️ Digital & Web Utilities</h2>
         <div class="grid">
-            <div class="tool-card"><h3>Image Resize</h3><a href="image-resize.html" class="btn-tool">Open Tool</a></div>
-            <div class="tool-card"><h3>Instagram Boost</h3><a href="instagram.html" class="btn-tool">Open Tool</a></div>
-            <div class="tool-card"><h3>Instagram Ai Caption</h3><a href="insta-tool.html" class="btn-tool">Open Tool</a></div>
-            <div class="tool-card"><h3>Photo to PDF</h3><a href="photo-to-pdf.html" class="btn-tool">Open Tool</a></div>
-            <div class="tool-card"><h3>PDF to Image</h3><a href="pdf-to-image.html" class="btn-tool">Open Tool</a></div>
-            <div class="tool-card"><h3>Website Booster</h3><a href="website-booster.html" class="btn-tool">Open Tool</a></div>
-            <div class="tool-card"><h3>Website Booster Pro</h3><a href="websitebooster-tool.html" class="btn-tool">Open Tool</a></div>
-            <div class="tool-card"><h3>Website Ads</h3><a href="website-ads.html" class="btn-tool">Open Tool</a></div>
-            <div class="tool-card"><h3>Website Ads 2</h3><a href="website-ads2.html" class="btn-tool">Open Tool</a></div>
-            <div class="tool-card"><h3>Website Fast</h3><a href="website-Fast.html" class="btn-tool">Open Tool</a></div>
-            <div class="tool-card"><h3>Replit</h3><a href="Replit.html" class="btn-tool">Open Tool</a></div>
+            <div class="tool-card"><h3>Magic Image Resize</h3><a href="image-resize.html" class="btn-tool">Launch Tool</a></div>
+            <div class="tool-card"><h3>Instagram Growth Boost</h3><a href="instagram.html" class="btn-tool">Launch Tool</a></div>
+            <div class="tool-card"><h3>Insta AI Caption Bot</h3><a href="insta-tool.html" class="btn-tool">Launch Tool</a></div>
+            <div class="tool-card"><h3>Photo to PDF Studio</h3><a href="photo-to-pdf.html" class="btn-tool">Launch Tool</a></div>
+            <div class="tool-card"><h3>PDF to Image Converter</h3><a href="pdf-to-image.html" class="btn-tool">Launch Tool</a></div>
+            <div class="tool-card"><h3>Website Speed Booster</h3><a href="website-booster.html" class="btn-tool">Launch Tool</a></div>
+            <div class="tool-card"><h3>Website SEO Booster Pro</h3><a href="websitebooster-tool.html" class="btn-tool">Launch Tool</a></div>
+            <div class="tool-card"><h3>Ad Simulation Tool</h3><a href="website-ads.html" class="btn-tool">Launch Tool</a></div>
+            <div class="tool-card"><h3>Cloud Replit Engine</h3><a href="Replit.html" class="btn-tool">Launch Tool</a></div>
         </div>
 
-        <div class="about-content">
-            <h2>Why Choose YouTubeHelper?</h2>
-            <p><strong>YouTubeHelper</strong> is a specialized platform designed to simplify the technical side of content creation. We understand that managing a YouTube channel requires more than just filming; it involves SEO, thumbnail design, and constant performance tracking. Our tools are built to handle these tasks directly in your browser.</p>
-            <p><strong>Privacy First:</strong> Unlike other platforms, we don't store your data or track your inputs. Every conversion and analysis happens locally, ensuring 100% data security. From converting complex PDFs to generating viral tags, everything is just a click away.</p>
+        <div class="seo-content">
+            <h2>The All-In-One Digital Ecosystem for Creators</h2>
+            <p>Welcome to <strong>YouTubeHelper</strong>, your premium destination for cutting-edge online utilities. In the rapidly evolving landscape of 2026, content creators need more than just basic tools; they need a high-performance ecosystem. Our platform is designed to provide exactly that. Whether you're looking to monitor your live streams via our <strong>Multi YouTube Live Viewer</strong> or want to craft high-conversion metadata using our <strong>SEO Tags Generator</strong>, we've got you covered.</p>
+            
+            <p><strong>Professional YouTube Growth:</strong> We specialize in helping creators scale. Our <em>YouTube Channel Audit</em> tool analyzes your metrics to provide actionable growth strategies. Need to see how your video looks across different regions? Use our <em>Multi Browser Engine</em> to simulate real-world user experiences. We also provide specialized tools for <strong>YouTube Shorts</strong>, ensuring your vertical content gets the visibility it deserves.</p>
+
+            <p><strong>Universal Utility Suite:</strong> Beyond YouTube, our <em>Digital Utilities</em> section offers lightning-fast document and media processing. From <strong>Photo to PDF</strong> conversions to <strong>AI-driven Instagram Captions</strong>, we use the latest technology to save you hours of manual work. All our tools run in a sandbox environment in your browser, meaning your private photos and documents never touch our servers.</p>
+
+            <p><strong>Why YouTubeHelper?</strong> Our unique <em>Glass UI</em> isn't just about aesthetics; it's about providing a focused, distraction-free environment. With zero tracking, zero ads (for a clean experience), and zero subscription fees, YouTubeHelper stands as the gold standard for free web utilities in the creator economy.</p>
         </div>
 
     </div>
 
     <footer>
-        <p>&copy; 2026 YouTubeHelper. All rights reserved.</p>
-        <p>Empowering creators worldwide with free digital tools.</p>
+        <p>&copy; 2026 YouTubeHelper | Designed for the Next Generation of Creators</p>
     </footer>
 
     <script>
-        function toggleTheme() {
-            const body = document.body;
-            const btn = document.getElementById('theme-toggle');
-            body.classList.toggle('dark-mode');
-            
-            if (body.classList.contains('dark-mode')) {
-                btn.textContent = '☀️ Light Mode';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                btn.textContent = '🌙 Dark Mode';
-                localStorage.setItem('theme', 'light');
-            }
-        }
+        // Rain Drop Generator
+        const rainContainer = document.getElementById('rain');
+        const dropCount = 100;
 
-        // Load saved theme
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.classList.add('dark-mode');
-            document.getElementById('theme-toggle').textContent = '☀️ Light Mode';
+        for (let i = 0; i < dropCount; i++) {
+            const drop = document.createElement('div');
+            drop.classList.add('drop');
+            drop.style.left = Math.random() * 100 + 'vw';
+            drop.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
+            drop.style.animationDelay = Math.random() * 2 + 's';
+            drop.style.opacity = Math.random() * 0.3;
+            rainContainer.appendChild(drop);
         }
     </script>
 </body>
