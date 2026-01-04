@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Image Resizer & Editor | YouTubeHelper</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --primary: #FF3D3D;
+            --accent: #00D1FF;
+            --text-main: #ffffff;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            background: #0f172a;
+            color: var(--text-main);
+            min-height: 100vh;
+        }
+
+        .glass-header {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--glass-border);
+            text-align: center;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+
+        .upload-card {
+            background: var(--glass-bg);
+            border: 2px dashed var(--glass-border);
+            border-radius: 30px;
+            padding: 50px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .upload-card:hover { border-color: var(--primary); background: rgba(255,255,255,0.12); }
+
+        /* --- Editor Layout --- */
+        .editor-wrapper {
+            display: none;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .canvas-area {
+            background: var(--glass-bg);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid var(--glass-border);
+            max-height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        #imageToEdit { max-width: 100%; display: block; }
+
+        .controls-panel {
+            background: var(--glass-bg);
+            border-radius: 25px;
+            padding: 30px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .control-group { margin-bottom: 25px; }
+        label { display: block; font-size: 13px; margin-bottom: 10px; opacity: 0.7; }
+        
+        .size-inputs { display: flex; gap: 10px; }
+        .size-inputs input {
+            width: 100%;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--glass-border);
+            padding: 10px;
+            border-radius: 8px;
+            color: white;
+        }
+
+        .btn-action {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+        .btn-crop { background: var(--accent); color: #000; }
+        .btn-download { background: var(--primary); color: #fff; }
+
+        .seo-section { margin-top: 80px; line-height: 1.8; color: #94a3b8; }
+
+        @media (max-width: 900px) {
+            .editor-wrapper { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="glass-header">
+        <a href="index.html" style="color:var(--primary); text-decoration:none; font-weight:800; font-size:24px;">🚀 YouTubeHelper</a>
+    </header>
+
+    <div class="container">
+        <div class="upload-card" id="dropZone" onclick="document.getElementById('fileInput').click()">
+            <h2 style="margin:0;">📁 Click or Drag to Upload Image</h2>
+            <p style="opacity: 0.6; margin-top: 10px;">Supports JPG, PNG, WEBP</p>
+            <input type="file" id="fileInput" hidden accept="image/*">
+        </div>
+
+        <div class="editor-wrapper" id="editorWrapper">
+            <div class="canvas-area">
+                <img id="imageToEdit" src="">
+            </div>
+
+            <div class="controls-panel">
+                <div class="control-group">
+                    <label>Resize Dimensions (px)</label>
+                    <div class="size-inputs">
+                        <input type="number" id="widthInput" placeholder="Width">
+                        <input type="number" id="heightInput" placeholder="Height">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Quick Filters</label>
+                    <select id="filterSelect" onchange="applyFilter()" style="width:100%; padding:10px; border-radius:8px; background:#222; color:white; border:1px solid var(--glass-border);">
+                        <option value="none">Original</option>
+                        <option value="grayscale(100%)">Grayscale</option>
+                        <option value="sepia(100%)">Sepia</option>
+                        <option value="brightness(150%)">Bright</option>
+                        <option value="contrast(150%)">High Contrast</option>
+                    </select>
+                </div>
+
+                <button class="btn-action btn-crop" onclick="enableCrop()">Enable/Disable Crop</button>
+                <button class="btn-action btn-download" onclick="downloadImage()">Download Final Image</button>
+                <p style="font-size: 11px; text-align:center; opacity:0.5;">*Crop before downloading for best results</p>
+            </div>
+        </div>
+
+        <div class="seo-section">
+            <h2>Professional Image Resizing & Editing Without Quality Loss</h2>
+            <p>Welcome to <strong>YouTubeHelper's Image Edit Studio</strong>, the most versatile browser-based image utility of 2026. Whether you are a YouTuber needing a specific thumbnail size, a blogger optimizing photos for faster load times, or a social media manager crafting the perfect Instagram post, our tool provides a high-performance solution. We've built this studio to eliminate the need for heavy software like Photoshop for everyday editing tasks.</p>
+
+            <p><strong>Advanced Resizing & Compression:</strong> Our resizer allows you to manually input dimensions in pixels, ensuring that your image fits perfectly wherever you plan to use it. But we don't just stretch pixels; our algorithm uses high-quality interpolation to maintain clarity even when downscaling. This is crucial for web performance, as properly resized images can significantly improve your website's SEO by reducing page weight and increasing load speed.</p>
+
+            <p><strong>Professional Cropping & Aspect Ratios:</strong> With our integrated <em>Cropper.js</em> engine, you get a fluid and intuitive cropping experience. You can easily remove unwanted borders or focus on a specific subject within your photo. The cropping tool works seamlessly on both desktop and mobile devices, providing a "Drag-and-Drop" interface that is as simple as it is powerful. Combined with our quick-apply filters, you can transform a raw photo into a polished asset in seconds.</p>
+
+            <p><strong>Instant Filters & Visual Enhancements:</strong> Sometimes an image just needs a little more pop. Our "Quick Filters" menu includes essentials like High Contrast, Sepia, and Brightness adjustments. These filters are applied using CSS-hardware acceleration, meaning you see the changes instantly without any lag. It's the perfect way to give your YouTube thumbnails or blog headers a consistent, professional look across your entire brand.</p>
+
+            <p><strong>Privacy First - 100% Local Processing:</strong> At YouTubeHelper, we understand the importance of data security. Unlike other online editors that upload your private photos to their servers, our Image Studio works entirely within your browser. Your images never leave your computer. All the resizing, cropping, and filtering happens locally, providing you with maximum privacy and lightning-fast speed. Experience the future of private, professional image editing with YouTubeHelper today.</p>
+        </div>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const imgElement = document.getElementById('imageToEdit');
+        const wrapper = document.getElementById('editorWrapper');
+        let cropper = null;
+
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    imgElement.src = event.target.result;
+                    wrapper.style.display = 'grid';
+                    document.getElementById('dropZone').style.display = 'none';
+                    
+                    // Set default dimensions
+                    const tempImg = new Image();
+                    tempImg.src = event.target.result;
+                    tempImg.onload = function() {
+                        document.getElementById('widthInput').value = this.width;
+                        document.getElementById('heightInput').value = this.height;
+                    }
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function enableCrop() {
+            if (cropper) {
+                cropper.destroy();
+                cropper = null;
+            } else {
+                cropper = new Cropper(imgElement, {
+                    viewMode: 1,
+                    autoCropArea: 1,
+                });
+            }
+        }
+
+        function applyFilter() {
+            const filter = document.getElementById('filterSelect').value;
+            imgElement.style.filter = filter;
+        }
+
+        function downloadImage() {
+            let canvas;
+            if (cropper) {
+                canvas = cropper.getCroppedCanvas({
+                    width: document.getElementById('widthInput').value,
+                    height: document.getElementById('heightInput').value
+                });
+            } else {
+                canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = document.getElementById('widthInput').value;
+                canvas.height = document.getElementById('heightInput').value;
+                ctx.filter = imgElement.style.filter;
+                ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
+            }
+
+            const link = document.createElement('a');
+            link.download = 'YouTubeHelper-Edited-Image.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+    </script>
+</body>
+</html>
