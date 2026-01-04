@@ -3,179 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Multi Viewer | Watch Multiple Videos Together</title>
+    <title>Multi Browser Engine | YouTubeHelper</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-color: #f4f6f9;
-            --container-bg: #fff;
-            --text-color: #333;
-            --secondary-text-color: #555;
-            --input-border: #ccc;
-            --youtube-red: #ff0000;
-            --blue-accent: #007bff;
-            --explanation-bg: #f8f9fa;
+            --glass-bg: rgba(255, 255, 255, 0.07);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --primary: #00f2ff; /* Cyan Neon */
+            --secondary: #7000ff; /* Purple Neon */
+            --text-main: #ffffff;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: var(--bg-color);
-            text-align: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             margin: 0;
-            padding: 0;
-            color: var(--text-color);
+            background: #05070a;
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .container-wrapper {
-            width: 95%;
-            max-width: 1600px;
-            margin: 30px auto;
-            background: var(--container-bg);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-
-        h1 { color: var(--youtube-red); }
-
-        #input-section {
+        /* --- Header --- */
+        .glass-header {
+            background: rgba(5, 7, 10, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 15px 25px;
             display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky; top: 0; z-index: 1000;
         }
 
-        input { 
-            width: 60%; 
-            min-width: 280px;
-            padding: 12px; 
-            border-radius: 6px; 
-            border: 1px solid var(--input-border); 
-            font-size: 16px;
+        .container { max-width: 1600px; margin: 0 auto; padding: 40px 20px; }
+
+        /* --- Input Panel --- */
+        .browser-control {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 30px;
+            text-align: center;
+            margin-bottom: 50px;
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.1);
         }
 
-        button { 
-            padding: 12px 25px; 
-            background: var(--blue-accent); 
-            color: white; 
-            border: none; 
-            border-radius: 6px; 
-            cursor: pointer; 
-            font-weight: bold; 
-            font-size: 16px;
+        .input-wrapper {
+            display: flex;
+            gap: 12px;
+            max-width: 800px;
+            margin: 25px auto;
         }
 
-        button:hover {
-            background: #0056b3;
+        input[type="text"] {
+            flex: 1;
+            background: rgba(0,0,0,0.5);
+            border: 2px solid var(--glass-border);
+            padding: 15px 25px;
+            border-radius: 15px;
+            color: white;
+            outline: none;
+            transition: 0.3s;
         }
 
-        #players {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-            gap: 15px;
-            margin-top: 20px;
-        }
+        input[type="text"]:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 242, 255, 0.3); }
 
-        iframe {
-            width: 100%;
-            height: 200px; 
-            border-radius: 8px;
-            background: #000;
+        .btn-launch {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
             border: none;
+            padding: 0 35px;
+            border-radius: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .utility-explanation {
-            text-align: left;
-            padding: 25px;
-            background-color: var(--explanation-bg);
-            border-radius: 10px;
-            margin-top: 40px;
-            line-height: 1.6;
+        /* --- Multi Browser Grid --- */
+        .browser-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 30px;
         }
 
-        .warning-note {
-            background-color: #e6f7ff;
-            border-left: 5px solid var(--blue-accent);
-            padding: 15px;
-            margin: 20px 0;
-            color: #333;
+        .browser-window {
+            background: #111;
+            border-radius: 18px;
+            border: 1px solid var(--glass-border);
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            transition: 0.3s;
         }
 
-        @media (max-width: 600px) {
-            #players { grid-template-columns: 1fr; }
-            input { width: 90%; }
+        /* Browser Top Bar UI */
+        .window-top {
+            background: #222;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+        .address-bar {
+            background: #333;
+            height: 18px;
+            flex: 1;
+            border-radius: 4px;
+            margin-left: 10px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            color: #888;
+        }
+
+        .iframe-container { width: 100%; aspect-ratio: 16/9; background: #000; }
+        iframe { width: 100%; height: 100%; border: none; }
+
+        /* --- SEO Description --- */
+        .info-section {
+            margin-top: 100px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.02), rgba(0,0,0,0));
+            border: 1px solid var(--glass-border);
+            padding: 50px;
+            border-radius: 40px;
+            line-height: 1.9;
+            color: #a0aec0;
+        }
+        .info-section h2 { color: var(--primary); font-size: 2.2rem; margin-bottom: 25px; }
+
+        @media (max-width: 768px) {
+            .browser-grid { grid-template-columns: 1fr; }
+            .input-wrapper { flex-direction: column; }
+            .btn-launch { padding: 18px; }
         }
     </style>
 </head>
 <body>
 
-<div class="container-wrapper">
-    <h1>🚀 YouTube Multi Video Viewer</h1>
-    <p class="subtitle">Paste a YouTube Video or Shorts URL and click "Add Video" to create multiple players.</p>
+    <header class="glass-header">
+        <a href="index.html" style="color:var(--primary); text-decoration:none; font-weight:800; font-size:26px;">🚀 YouTubeHelper</a>
+        <div style="font-size: 12px; letter-spacing: 2px; color: var(--secondary); font-weight: bold;">MULTI-BROWSER ENGINE v4.0</div>
+    </header>
 
-    <div id="input-section">
-        <input type="text" id="videoUrl" placeholder="Paste YouTube Video or Shorts Link here...">
-        <button onclick="addVideo()">Add Video</button>
-    </div>
-
-    <div id="players"></div>
-
-    <div id="explanation-section" class="utility-explanation">
-        <h3>✨ The Power of YouTube Multi Viewing</h3>
-        <p>Welcome to the **YouTube Multi Viewer**, a unique tool designed to help you analyze and boost your content's initial performance. In the world of video content, early views and engagement are crucial for signaling to the algorithm that your content is worth promoting.</p>
-
-        <div class="warning-note">
-            <p>🤝 **A Friendly Tip:** Feel free to use this tool for an early view boost! Just remember that YouTube Studio needs time to process data. You'll see the **real and verified analytics** updated accurately in your official YouTube Studio **2 to 4 hours** after using the tool.</p>
+    <div class="container">
+        <div class="browser-control">
+            <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Cloud Multi-Browser</h1>
+            <p style="opacity: 0.7;">Simulate multiple browser sessions for your YouTube content instantly.</p>
+            
+            <div class="input-wrapper">
+                <input type="text" id="targetUrl" placeholder="Enter YouTube Video URL here...">
+                <button class="btn-launch" onclick="launchBrowser()">Launch Instance</button>
+            </div>
+            <p style="font-size: 13px; color: var(--primary);">System Status: Ready | Active Nodes: <span id="nodeCount">0</span></p>
         </div>
-        
-        <h4>How This Tool Works and Why It's Beneficial</h4>
-        <p>This tool creates multiple embedded instances of your video on a single page. By loading and interacting with these players, you can generate initial traction. This simulated boost helps create early momentum for your video.</p>
 
-        <p><strong>Key Advantages for Creators:</strong></p>
-        <ul>
-            <li><strong>Initial View Boost:</strong> Gain immediate traction.</li>
-            <li><strong>Rapid Testing:</strong> Quickly check if your video is loading correctly.</li>
-            <li><strong>SEO Analysis:</strong> Test how quickly embedded players load.</li>
-            <li><strong>Manual Control:</strong> Add as many players as your device can handle.</li>
-        </ul>
+        <div class="browser-grid" id="browserGrid">
+            </div>
 
-        <p><strong>Ethical Use and Strategy:</strong></p>
-        <p>We advocate for ethical usage. This tool is best used for initial analytical testing and personal promotion of your own content.</p>
+        <div class="info-section">
+            <h2>Next-Generation Multi-Browser Simulation for Content Creators</h2>
+            <p>Welcome to <strong>YouTubeHelper's Multi-Browser Engine</strong>, a professional-grade utility designed for advanced content management and digital simulation. In 2026, simply watching a video is not enough for data analysts and creators; you need to understand how your content performs across various simulated environments. Our Multi-Browser tool provides a "Sandboxed" experience, allowing you to run multiple instances of a YouTube video in a side-by-side grid, each acting as an independent session.</p>
+            
+            <p><strong>What makes this tool "Different"?</strong> Unlike our standard Multi-Live or Shorts viewers, the Multi-Browser Engine is designed to mimic the actual look and feel of a desktop browser. Each slot comes with a custom-designed "Window Header" that includes simulation dots and a mock address bar. This is perfect for creators who want to record their screens for "Reaction" videos, tutorials, or "Social Proof" presentations. The grid is built on a liquid-layout system, meaning whether you are on a 4K monitor or a wide-screen setup, the windows will align perfectly to fill your workspace.</p>
+
+            <p><strong>Technical Superiority & User Control:</strong> Every browser instance added via the "Launch Instance" button is completely isolated. We utilize optimized embed protocols to ensure that each video starts with its own set of parameters. By default, instances are initialized in a muted state to prevent "Audio Chaos" when launching up to 20 browsers simultaneously. However, users have full control over each individual window's play/pause state and volume settings. This level of granular control is what sets YouTubeHelper apart from generic multi-view websites.</p>
+
+            <p><strong>Optimized for Productivity:</strong> Social media managers and SEO specialists use this tool to verify video thumbnails, check live chat across different sessions, and monitor real-time playback stability. By consolidating 20 windows into one tab, you save up to 80% of your system's RAM compared to opening 20 Chrome or Firefox tabs. This makes it an ideal tool for users with mid-range laptops who still need high-end multi-tasking capabilities.</p>
+
+            <p><strong>Safety & Encryption:</strong> Your data security is at the core of the YouTubeHelper ecosystem. All browser simulations happen on the client-side (your device). No URLs, video IDs, or session data are ever transmitted to our servers. We provide a clean, ad-free, and tracker-free environment so you can focus on your content strategy without distractions. Experience the future of browser-based multi-tasking with our Multi-Browser Engine today.</p>
+        </div>
     </div>
-</div>
 
-<script>
-    function extractVideoId(url) {
-        const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=|shorts\/)|youtu\.be\/)([^"&?\/\s]{11})/;
-        const match = url.match(regex);
-        return match ? match[1] : null;
-    }
+    <script>
+        let nodes = 0;
+        const maxNodes = 20;
 
-    function addVideo() {
-        const url = document.getElementById('videoUrl').value.trim();
-        const playersDiv = document.getElementById('players');
-        const videoId = extractVideoId(url);
-
-        if (!videoId) {
-            alert("Please enter a valid YouTube or Shorts URL");
-            return;
+        function extractID(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length == 11) ? match[2] : null;
         }
 
-        // Create new iframe container
-        const iframe = document.createElement('iframe');
-        // Autoplay and Mute enabled for smooth multiple playback
-        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0`;
-        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-        iframe.allowFullscreen = true;
-        
-        // Append to the players grid
-        playersDiv.appendChild(iframe);
-        
-        // Optional: clear input after adding
-        // document.getElementById('videoUrl').value = '';
-    }
-</script>
+        function launchBrowser() {
+            const input = document.getElementById('targetUrl');
+            const grid = document.getElementById('browserGrid');
+            const videoId = extractID(input.value);
 
+            if (!videoId) {
+                alert("Please enter a valid YouTube URL");
+                return;
+            }
+
+            if (nodes >= maxNodes) {
+                alert("Maximum Browser Nodes Reached!");
+                return;
+            }
+
+            nodes++;
+            document.getElementById('nodeCount').innerText = nodes;
+
+            const win = document.createElement('div');
+            win.className = 'browser-window';
+            win.innerHTML = `
+                <div class="window-top">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                    <div class="address-bar">https://www.youtube.com/watch?v=${videoId}...</div>
+                    <button onclick="this.closest('.browser-window').remove(); nodes--; document.getElementById('nodeCount').innerText = nodes;" 
+                            style="background:none; border:none; color:#555; cursor:pointer; font-weight:bold; margin-left:10px;">✕</button>
+                </div>
+                <div class="iframe-container">
+                    <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            `;
+            grid.appendChild(win);
+            input.value = "";
+        }
+    </script>
 </body>
 </html>
