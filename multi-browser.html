@@ -127,8 +127,8 @@
             padding-left: 10px;
             color: #888;
             overflow: hidden;
-            white-space: nowrap;
             text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .iframe-container { width: 100%; aspect-ratio: 16/9; background: #000; }
@@ -166,7 +166,7 @@
             <p style="opacity: 0.7;">Simulate multiple browser sessions for your YouTube content instantly.</p>
             
             <div class="input-wrapper">
-                <input type="text" id="targetUrl" placeholder="Paste YouTube, Instagram, or Facebook URL here...">
+                <input type="text" id="targetUrl" placeholder="Enter YouTube, Instagram, or Facebook URL here...">
                 <button class="btn-launch" onclick="launchBrowser()">Launch Instance</button>
             </div>
             <p style="font-size: 13px; color: var(--primary);">System Status: Ready | Active Nodes: <span id="nodeCount">0</span></p>
@@ -194,25 +194,25 @@
         const maxNodes = 20;
 
         function getEmbedUrl(url) {
-            // YouTube Handler (Long & Shorts)
+            // YouTube (Long & Shorts)
             if (url.includes('youtube.com') || url.includes('youtu.be')) {
-                const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+                const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|shorts\/)([^#\&\?]*).*/;
                 const match = url.match(regExp);
                 if (match && match[2].length == 11) {
-                    return `https://www.youtube.com/embed/${match[2]}?autoplay=1&mute=1&rel=0`;
+                    return `https://www.youtube.com/embed/${match[2]}?autoplay=1&rel=0`;
                 }
             }
             
-            // Instagram Handler (Reels & Posts)
+            // Instagram (Reels & Posts)
             if (url.includes('instagram.com')) {
-                let cleanUrl = url.split('?')[0]; // Remove query params
+                let cleanUrl = url.split('?')[0];
                 if (!cleanUrl.endsWith('/')) cleanUrl += '/';
                 return `${cleanUrl}embed/`;
             }
 
-            // Facebook Handler
+            // Facebook
             if (url.includes('facebook.com')) {
-                return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=0&t=0`;
+                return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=0&autoplay=1`;
             }
 
             return null;
@@ -221,8 +221,8 @@
         function launchBrowser() {
             const input = document.getElementById('targetUrl');
             const grid = document.getElementById('browserGrid');
-            const embedUrl = getEmbedUrl(input.value);
-            const originalUrl = input.value;
+            const rawUrl = input.value.trim();
+            const embedUrl = getEmbedUrl(rawUrl);
 
             if (!embedUrl) {
                 alert("Please enter a valid YouTube, Instagram, or Facebook URL");
@@ -239,20 +239,18 @@
 
             const win = document.createElement('div');
             win.className = 'browser-window';
-            
-            // UI elements
             win.innerHTML = `
                 <div class="window-top">
                     <div class="dot red"></div>
                     <div class="dot yellow"></div>
                     <div class="dot green"></div>
-                    <div class="address-bar">${originalUrl.substring(0, 40)}...</div>
+                    <div class="address-bar">${rawUrl}</div>
                     <button onclick="this.closest('.browser-window').remove(); nodes--; document.getElementById('nodeCount').innerText = nodes;" 
                             style="background:none; border:none; color:#555; cursor:pointer; font-weight:bold; margin-left:10px;">✕</button>
                 </div>
                 <div class="iframe-container">
                     <iframe src="${embedUrl}" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                             allowfullscreen>
                     </iframe>
                 </div>
