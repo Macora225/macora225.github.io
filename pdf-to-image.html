@@ -43,18 +43,7 @@
             text-align: center;
         }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
-
-        .ad-slot {
-            margin: 20px auto;
-            text-align: center;
-            min-height: 90px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
 
         .upload-card {
             background: var(--glass-bg);
@@ -108,18 +97,9 @@
 
         .seo-box { margin-top: 80px; line-height: 1.8; color: #94a3b8; }
         .seo-box h2 { color: var(--primary); }
-
-        .direct-link-btn {
-            display: inline-block;
-            margin: 10px 0;
-            padding: 12px 25px;
-            background: var(--accent);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 14px;
-        }
+        
+        /* Ad spaces */
+        .ad-container { margin: 20px 0; text-align: center; }
     </style>
 </head>
 <body>
@@ -132,8 +112,8 @@
 
     <div class="container">
         
-        <div class="ad-slot">
-            <a href="https://otieu.com/4/10439760" class="direct-link-btn" target="_blank">🚀 High Speed Server Link</a>
+        <div class="ad-container">
+            <a href="https://otieu.com/4/10439760" target="_blank" style="color:var(--primary); text-decoration:none; font-size:14px;">[ Premium Server Access ]</a>
         </div>
 
         <div class="upload-card" onclick="document.getElementById('pdfInput').click()">
@@ -142,7 +122,7 @@
             <input type="file" id="pdfInput" hidden accept="application/pdf">
         </div>
 
-        <div class="ad-slot">
+        <div class="ad-container">
             <script>(function(s){s.dataset.zone='10440034',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
         </div>
 
@@ -150,14 +130,19 @@
 
         <div class="image-grid" id="imageGrid"></div>
 
-        <div class="ad-slot">
+        <div class="ad-container">
             <script src="https://quge5.com/88/tag.min.js" data-zone="200420" async data-cfasync="false"></script>
         </div>
 
         <div class="seo-box">
             <h2>High-Quality PDF to Image Conversion Engine</h2>
-            <p>In the digital ecosystem of 2026, the ability to quickly extract content from rigid formats is essential. <strong>YouTubeHelper's PDF to Image Converter</strong> is a sophisticated web utility that allows you to transform static PDF documents into versatile PNG or JPEG images.</p>
-            <p><strong>Professional Rendering Technology:</strong> We utilize the <em>PDF.js</em> library to ensure every font and image is rendered perfectly. Your PDF file never leaves your browser, ensuring 100% privacy.</p>
+            <p>In the digital ecosystem of 2026, the ability to quickly extract content from rigid formats is essential. <strong>YouTubeHelper's PDF to Image Converter</strong> is a sophisticated web utility that allows you to transform static PDF documents into versatile PNG or JPEG images. Whether you need to share a specific page from an eBook on social media, extract a chart for a presentation, or simply view documents more easily on mobile devices, our tool provides a seamless, high-fidelity experience.</p>
+
+            <p><strong>Professional Rendering Technology:</strong> We utilize the <em>PDF.js</em> library, the same technology used by top-tier browsers, to ensure that every font, vector, and image within your PDF is rendered perfectly. Unlike many online converters that produce blurry results, our engine maintains the original resolution of the document. Each page is processed as an individual canvas element, allowing you to preview the content before downloading, ensuring you get the exact visual output you need.</p>
+
+            <p><strong>Client-Side Security & Privacy:</strong> Your data security is our hallmark. Most PDF converters require you to upload your sensitive files to their cloud servers, which can be a significant privacy risk. YouTubeHelper works differently. The entire conversion process happens locally on your computer. Your PDF file never leaves your browser, and no data is ever transmitted to our servers. This ensures 100% privacy for legal documents, personal records, and private creative works.</p>
+
+            <p><strong>Efficiency for Modern Creators:</strong> We have designed the interface to be as intuitive as possible. With a simple "One-Click Extract" system, you can process multi-page documents in seconds. Once the pages are rendered, you can choose to download individual images, making it a perfect tool for batch processing. Our ad-free, clutter-free environment is built for professional productivity. Elevate your document workflow today with the most secure PDF to image solution on the web.</p>
         </div>
     </div>
 
@@ -191,6 +176,7 @@
 
                     await page.render({ canvasContext: context, viewport: viewport }).promise;
 
+                    // Create UI Card
                     const card = document.createElement('div');
                     card.className = 'page-card';
                     
@@ -198,12 +184,13 @@
                     downloadBtn.className = 'btn-download';
                     downloadBtn.innerText = `Download Page ${i}`;
                     downloadBtn.onclick = () => {
+                        // Redirect/Open direct link on download
+                        window.open('https://otieu.com/4/10439760', '_blank');
+                        
                         const link = document.createElement('a');
                         link.download = `Page-${i}.png`;
                         link.href = canvas.toDataURL('image/png');
                         link.click();
-                        // Optional: Open direct link ad when downloading
-                        window.open('https://otieu.com/4/10439760', '_blank');
                     };
 
                     card.appendChild(canvas);
