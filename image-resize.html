@@ -5,15 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pro Image Resizer & Editor | YouTubeHelper</title>
 
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-80JNYYX5KK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-80JNYYX5KK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-80JNYYX5KK');
+    </script>
 
-  gtag('config', 'G-80JNYYX5KK');
-</script>
+    <script>
+    (function(cmxuze){
+    var d = document,
+        s = d.createElement('script'),
+        l = d.scripts[d.scripts.length - 1];
+    s.settings = cmxuze || {};
+    s.src = "\/\/piercing-flower.com\/bcX\/VXsJd.G_lV0aYeWdcc\/weRmg9qufZzUnlJk\/POT\/Y\/3VNmTeAK0LN\/j\/IIt\/NQjlc\/1tMNDsQ\/2lM\/wF";
+    s.async = true;
+    s.referrerPolicy = 'no-referrer-when-downgrade';
+    l.parentNode.insertBefore(s, l);
+    })({})
+    </script>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
@@ -57,7 +68,6 @@
         }
         .upload-card:hover { border-color: var(--primary); background: rgba(255,255,255,0.12); }
 
-        /* --- Editor Layout --- */
         .editor-wrapper {
             display: none;
             grid-template-columns: 1fr 350px;
@@ -112,6 +122,8 @@
         .btn-download { background: var(--primary); color: #fff; }
 
         .seo-section { margin-top: 80px; line-height: 1.8; color: #94a3b8; }
+        
+        .ad-banner { margin: 20px 0; text-align: center; }
 
         @media (max-width: 900px) {
             .editor-wrapper { grid-template-columns: 1fr; }
@@ -120,15 +132,47 @@
 </head>
 <body>
 
+    <script>
+    (function(oycy){
+    var d = document,
+        s = d.createElement('script'),
+        l = d.scripts[d.scripts.length - 1];
+    s.settings = oycy || {};
+    s.src = "\/\/piercing-flower.com\/bmX.Vqs\/d\/Gala0bY\/Wrca\/oeImU9YuhZnUel-kwPeTbYX3eNxTGAi0tMXzzkZteNdj\/cJ1\/MsDuQu0RMbAO";
+    s.async = true;
+    s.referrerPolicy = 'no-referrer-when-downgrade';
+    l.parentNode.insertBefore(s, l);
+    })({})
+    </script>
+
     <header class="glass-header">
         <a href="index.html" style="color:var(--primary); text-decoration:none; font-weight:800; font-size:24px;">🚀 YouTubeHelper</a>
     </header>
 
     <div class="container">
+        <div class="ad-banner">
+            <a href="https://actuallist.com/d.m/FzzKdTG/NEvSZ-GHUp/Zezma9/umZ/UQlhkyPoTKYw3RNnT/Aq0GNtDSMMtiNIj-cR1GMAD-Qz0WN/Av" target="_blank" style="color:var(--accent); text-decoration:none; font-weight:600;">[ High Speed Server Access ]</a>
+        </div>
+
         <div class="upload-card" id="dropZone" onclick="document.getElementById('fileInput').click()">
             <h2 style="margin:0;">📁 Click or Drag to Upload Image</h2>
             <p style="opacity: 0.6; margin-top: 10px;">Supports JPG, PNG, WEBP</p>
             <input type="file" id="fileInput" hidden accept="image/*">
+        </div>
+
+        <div class="ad-banner">
+            <script>
+            (function(zldqr){
+            var d = document,
+                s = d.createElement('script'),
+                l = d.scripts[d.scripts.length - 1];
+            s.settings = zldqr || {};
+            s.src = "\/\/piercing-flower.com\/bLXbV\/sKd.G-lm0QYdWgcS\/AetmK9-unZsUaltkmP-TsY\/3dNvTWAy0JMWznEntPN\/j\/cW1oMjDcQxzRM\/gZ";
+            s.async = true;
+            s.referrerPolicy = 'no-referrer-when-downgrade';
+            l.parentNode.insertBefore(s, l);
+            })({})
+            </script>
         </div>
 
         <div class="editor-wrapper" id="editorWrapper">
@@ -191,7 +235,6 @@
                     wrapper.style.display = 'grid';
                     document.getElementById('dropZone').style.display = 'none';
                     
-                    // Set default dimensions
                     const tempImg = new Image();
                     tempImg.src = event.target.result;
                     tempImg.onload = function() {
@@ -199,7 +242,7 @@
                         document.getElementById('heightInput').value = this.height;
                     }
                 }
-                reader.readAsDataURL(file);
+                reader.readAsArrayBuffer(file);
             }
         });
 
@@ -221,17 +264,20 @@
         }
 
         function downloadImage() {
+            // Hilltop Direct Link Pop-under Simulation on Download
+            window.open('https://actuallist.com/d.m/FzzKdTG/NEvSZ-GHUp/Zezma9/umZ/UQlhkyPoTKYw3RNnT/Aq0GNtDSMMtiNIj-cR1GMAD-Qz0WN/Av', '_blank');
+
             let canvas;
             if (cropper) {
                 canvas = cropper.getCroppedCanvas({
-                    width: document.getElementById('widthInput').value,
-                    height: document.getElementById('heightInput').value
+                    width: parseInt(document.getElementById('widthInput').value),
+                    height: parseInt(document.getElementById('heightInput').value)
                 });
             } else {
                 canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
-                canvas.width = document.getElementById('widthInput').value;
-                canvas.height = document.getElementById('heightInput').value;
+                canvas.width = parseInt(document.getElementById('widthInput').value);
+                canvas.height = parseInt(document.getElementById('heightInput').value);
                 ctx.filter = imgElement.style.filter;
                 ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
             }
@@ -244,3 +290,4 @@
     </script>
 </body>
 </html>
+
