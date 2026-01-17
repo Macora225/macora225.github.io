@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi YouTube Live Viewer | YouTubeHelper</title>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-80JNYYX5KK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-80JNYYX5KK');
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-80JNYYX5KK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+      gtag('config', 'G-80JNYYX5KK');
+    </script> <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -112,6 +111,7 @@
             cursor: pointer;
             padding: 2px 8px;
             font-size: 12px;
+            z-index: 10;
         }
 
         /* --- Description Section --- */
@@ -193,7 +193,7 @@
             }
 
             count++;
-            document.getElementById('counter').innerText = `Slots: ${count} / 20`;
+            updateCounter();
 
             const slot = document.createElement('div');
             slot.className = 'video-slot';
@@ -205,12 +205,16 @@
                 </iframe>
             `;
             grid.appendChild(slot);
-            input.value = ""; // Clear input
+            input.value = ""; 
         }
 
         function removeVideo(btn) {
             btn.parentElement.remove();
             count--;
+            updateCounter();
+        }
+
+        function updateCounter() {
             document.getElementById('counter').innerText = `Slots: ${count} / 20`;
         }
     </script>
