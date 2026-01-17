@@ -134,7 +134,7 @@
 
         .content-section h2 { color: var(--primary); margin-bottom: 20px; font-size: 2rem; }
 
-        /* --- New Video Section --- */
+        /* --- Featured Video Footer --- */
         .video-footer {
             margin-top: 40px;
             text-align: center;
@@ -144,7 +144,7 @@
             border: 1px solid var(--glass-border);
         }
 
-        .video-container {
+        .video-wrapper {
             position: relative;
             padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
             height: 0;
@@ -154,7 +154,7 @@
             border-radius: 15px;
         }
 
-        .video-container iframe {
+        .video-wrapper iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -203,9 +203,9 @@
         </div>
 
         <div class="video-footer">
-            <h3 style="color: var(--primary); margin-bottom: 15px;">Featured Video</h3>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/G-80JNYYX5KK" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <h2 style="color: var(--primary); margin-bottom: 20px;">Featured Video</h2>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/YzJxCHEHl7Y" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -215,6 +215,7 @@
         const maxShorts = 20;
 
         function extractShortID(url) {
+            // Regex to handle both /shorts/ and standard /watch?v= or youtu.be links
             const regExp = /^.*(shorts\/|youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
             const match = url.match(regExp);
             return (match && match[2].length == 11) ? match[2] : null;
