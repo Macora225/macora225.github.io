@@ -7,8 +7,7 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
-   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9863GWKBRP"></script>
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9863GWKBRP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -28,7 +27,7 @@
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             margin: 0;
-            background: #000; /* Darker background for Insta feel */
+            background: #000; 
             color: var(--text-main);
             min-height: 100vh;
         }
@@ -41,9 +40,24 @@
             text-align: center;
         }
 
-        .container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px 20px; }
 
-        /* --- Input Section --- */
+        /* Ad Styling */
+        .ad-container-flex {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .ad-box {
+            text-align: center;
+            min-height: 100px;
+            width: 100%;
+            margin: 15px 0;
+        }
+
         .control-panel {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
@@ -54,35 +68,24 @@
         }
 
         .input-group {
-            display: flex;
-            gap: 12px;
-            max-width: 750px;
-            margin: 20px auto;
+            display: flex; gap: 12px; max-width: 750px; margin: 20px auto;
         }
 
         input {
-            flex: 1;
-            background: rgba(255,255,255,0.05);
+            flex: 1; background: rgba(255,255,255,0.05);
             border: 1px solid var(--glass-border);
-            padding: 15px;
-            border-radius: 12px;
-            color: white;
-            outline: none;
+            padding: 15px; border-radius: 12px;
+            color: white; outline: none;
         }
 
         .btn-add {
             background: var(--insta-gradient);
-            color: white;
-            border: none;
-            padding: 0 30px;
-            border-radius: 12px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: 0.3s;
+            color: white; border: none; padding: 0 30px;
+            border-radius: 12px; font-weight: 800;
+            cursor: pointer; transition: 0.3s;
         }
         .btn-add:hover { transform: scale(1.03); opacity: 0.9; }
 
-        /* --- Multi Grid --- */
         .insta-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -90,42 +93,25 @@
         }
 
         .insta-slot {
-            background: #111;
-            border-radius: 20px;
-            overflow: hidden;
-            aspect-ratio: 9/16;
-            border: 1px solid var(--glass-border);
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: #111; border-radius: 20px; overflow: hidden;
+            aspect-ratio: 9/16; border: 1px solid var(--glass-border);
+            position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .slot-header {
-            background: #1a1a1a;
-            padding: 8px 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 11px;
-            color: #888;
+            background: #1a1a1a; padding: 8px 12px;
+            display: flex; justify-content: space-between;
+            align-items: center; font-size: 11px; color: #888;
         }
 
-        .remove-btn {
-            background: none;
-            border: none;
-            color: #ff3d3d;
-            cursor: pointer;
-            font-weight: bold;
-        }
+        .remove-btn { background: none; border: none; color: #ff3d3d; cursor: pointer; font-weight: bold; }
 
         iframe { width: 100%; height: 100%; border: none; }
 
         .seo-box {
-            margin-top: 100px;
-            padding: 45px;
+            margin-top: 60px; padding: 45px;
             background: rgba(255,255,255,0.02);
-            border-radius: 35px;
-            line-height: 1.8;
-            color: #94a3b8;
+            border-radius: 35px; line-height: 1.8; color: #94a3b8;
         }
         .seo-box h2 { color: #cc2366; }
 
@@ -143,6 +129,14 @@
     </header>
 
     <div class="container">
+        
+        <div class="ad-box">
+            <script>
+                atOptions = { 'key' : '13924bf70199076c8535df1472e42c53', 'format' : 'iframe', 'height' : 600, 'width' : 160, 'params' : {} };
+            </script>
+            <script src="https://www.highperformanceformat.com/13924bf70199076c8535df1472e42c53/invoke.js"></script>
+        </div>
+
         <div class="control-panel">
             <h1>Instagram Multi-Reel Booster</h1>
             <p>Paste Reel link and watch multiple instances side-by-side to boost engagement.</p>
@@ -153,20 +147,46 @@
             <p style="font-size: 13px; opacity: 0.6; margin-top: 10px;">Max Slots: 20 | Active: <span id="activeCount">0</span></p>
         </div>
 
-        <div class="insta-grid" id="instaGrid">
-            </div>
+        <div class="ad-box">
+            <script async="async" data-cfasync="false" src="https://pl28565685.effectivegatecpm.com/ad1288ee73006596cffbc44a44b97c80/invoke.js"></script>
+            <div id="container-ad1288ee73006596cffbc44a44b97c80"></div>
+        </div>
+
+        <div class="ad-box">
+            <script>
+                atOptions = { 'key' : '13924bf70199076c8535df1472e42c53', 'format' : 'iframe', 'height' : 600, 'width' : 160, 'params' : {} };
+            </script>
+            <script src="https://www.highperformanceformat.com/13924bf70199076c8535df1472e42c53/invoke.js"></script>
+        </div>
+
+        <div class="insta-grid" id="instaGrid"></div>
 
         <div class="seo-box">
             <h2>Ultimate Guide to Boosting Instagram Engagement with Multi-Viewer</h2>
-            <p>Welcome to the first-of-its-kind <strong>Instagram Multi-Reel Booster</strong> tool. In the competitive era of social media, engagement signals are crucial for the Instagram algorithm to push your content to the "Explore" page. Our tool is specifically designed for creators, digital marketers, and social media managers who need to monitor, review, or boost the visibility of their Instagram Reels through a centralized, multi-stream dashboard. By allowing up to 20 simultaneous Reel instances, YouTubeHelper (InstaHelper) saves you the trouble of switching between multiple devices or browser tabs.</p>
+            <p>Welcome to the first-of-its-kind <strong>Instagram Multi-Reel Booster</strong> tool. In the competitive era of social media, engagement signals are crucial for the Instagram algorithm...</p>
 
-            <p><strong>Optimize Your Content Strategy:</strong> A Reel's success often depends on its initial playback frequency and retention. With our multi-viewer, you can analyze your content side-by-side, check for playback glitches across multiple sessions, and ensure that your visuals and audio are perfectly synced. This tool mimics a multi-browser environment, providing each Reel its own slot within a responsive 9:16 portrait grid. This vertical-first design ensures that you see the content exactly as it appears on a mobile screen, providing a high-fidelity auditing experience.</p>
+            <div class="ad-box">
+                <script async="async" data-cfasync="false" src="https://pl28565685.effectivegatecpm.com/ad1288ee73006596cffbc44a44b97c80/invoke.js"></script>
+                <div id="container-ad1288ee73006596cffbc44a44b97c80"></div>
+            </div>
 
-            <p><strong>Seamless Integration & Privacy:</strong> Using the Instagram Multi-Reel Booster is incredibly simple. You only need to copy the link of your Reel from the Instagram app or website and paste it into our secure search bar. Our system automatically converts the URL into an embeddable format. We value your privacy above all else—this tool operates locally on your browser. We do not store your Instagram credentials, session cookies, or the links you process. It is a 100% safe, web-based utility designed for performance-minded users.</p>
+            <p><strong>Optimize Your Content Strategy:</strong> A Reel's success often depends on its initial playback frequency and retention...</p>
 
-            <p><strong>System Efficiency:</strong> Running multiple instances of Instagram can typically drain your device's RAM and CPU. However, our tool uses optimized iFrame embedding, which consumes significantly less power than opening 20 separate browser tabs. Whether you are on a high-end PC or a modern smartphone, the grid will automatically adjust to give you the smoothest possible experience. Experience the future of Instagram content management and take your Reel engagement to the next level with our professional Multi-Booster engine today.</p>
+            <div class="ad-box">
+                <script>
+                    atOptions = { 'key' : '13924bf70199076c8535df1472e42c53', 'format' : 'iframe', 'height' : 600, 'width' : 160, 'params' : {} };
+                </script>
+                <script src="https://www.highperformanceformat.com/13924bf70199076c8535df1472e42c53/invoke.js"></script>
+            </div>
+
+            <p><strong>Seamless Integration & Privacy:</strong> Using the Instagram Multi-Reel Booster is incredibly simple...</p>
+            <p><strong>System Efficiency:</strong> Running multiple instances of Instagram can typically drain your device's RAM and CPU...</p>
         </div>
     </div>
+
+    <script src="https://pl28565677.effectivegatecpm.com/90/50/f5/9050f54b6c10de9331b225e123bb342c.js"></script>
+    <script src="https://pl28565677.effectivegatecpm.com/90/50/f5/9050f54b6c10de9331b225e123bb342c.js"></script>
+    <script src="https://pl28566028.effectivegatecpm.com/cd/b1/3e/cdb13e373cdb73222c6ba23b3fa54e54.js"></script>
 
     <script>
         let count = 0;
@@ -176,24 +196,12 @@
             const input = document.getElementById('instaLink');
             let url = input.value.trim();
             const grid = document.getElementById('instaGrid');
-
-            if (!url.includes("instagram.com")) {
-                alert("Please enter a valid Instagram Reel link!");
-                return;
-            }
-
-            if (count >= maxSlots) {
-                alert("Maximum 20 slots reached!");
-                return;
-            }
-
-            // Standardize URL for embedding
+            if (!url.includes("instagram.com")) { alert("Please enter a valid Instagram Reel link!"); return; }
+            if (count >= maxSlots) { alert("Maximum 20 slots reached!"); return; }
             if (!url.endsWith("/")) url += "/";
             const embedUrl = url + "embed/";
-
             count++;
             document.getElementById('activeCount').innerText = count;
-
             const slot = document.createElement('div');
             slot.className = 'insta-slot';
             slot.innerHTML = `
