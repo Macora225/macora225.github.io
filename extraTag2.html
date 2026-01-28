@@ -3,181 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Multi-Reel Booster | YouTubeHelper</title>
+    <title>Multi YouTube Live Viewer | YouTubeHelper</title>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-80JNYYX5KK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-80JNYYX5KK');
+    </script> 
+
+    <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
+
+    <script type="text/javascript">
+        aclib.runAutoTag({
+            zoneId: 'elwmvcl1oa',
+        });
+    </script>
+
+    <script type="text/javascript">
+        aclib.runPop({ zoneId: '10853798' });
+        aclib.runPop({ zoneId: '10853798' });
+    </script>
+
+    <script type="text/javascript">
+        aclib.runInterstitial({ zoneId: '10853782' });
+        aclib.runInterstitial({ zoneId: '10853782' });
+    </script>
+
+    <script type="text/javascript">
+        aclib.runVideoSlider({ zoneId: '10853790' });
+        aclib.runVideoSlider({ zoneId: '10853790' });
+    </script>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9863GWKBRP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-9863GWKBRP');
-</script>
-    
     <style>
         :root {
-            --glass-bg: rgba(255, 255, 255, 0.08);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --insta-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            --text-main: #ffffff;
+            --bg-dark: #070b14;
+            --card-bg: rgba(23, 32, 53, 0.6);
+            --primary: #ff0000;
+            --primary-glow: rgba(255, 0, 0, 0.4);
+            --accent: #3b82f6;
+            --text-main: #f8fafc;
+            --glass-border: rgba(255, 255, 255, 0.08);
         }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             margin: 0;
-            background: #000; /* Darker background for Insta feel */
+            background: var(--bg-dark);
+            background-image: radial-gradient(circle at 50% 0%, #1a2a4a 0%, #070b14 70%);
             color: var(--text-main);
             min-height: 100vh;
         }
 
         .glass-header {
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(7, 11, 20, 0.8);
             backdrop-filter: blur(20px);
-            padding: 15px 20px;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             border-bottom: 1px solid var(--glass-border);
-            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        .container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
-
-        /* --- Input Section --- */
-        .control-panel {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            padding: 35px;
-            border-radius: 25px;
-            text-align: center;
-            margin-bottom: 40px;
+        .logo {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 22px;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
+
+        .logo span { color: var(--primary); }
+        .container { max-width: 1600px; margin: 0 auto; padding: 40px 20px; }
+
+        .hero-section { text-align: center; margin-bottom: 50px; }
+
+        .hero-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle { color: #94a3b8; font-size: 1.1rem; }
 
         .input-group {
+            max-width: 700px;
+            margin: 40px auto;
+            background: var(--card-bg);
+            padding: 8px;
+            border-radius: 100px;
             display: flex;
-            gap: 12px;
-            max-width: 750px;
-            margin: 20px auto;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transition: 0.3s;
         }
 
-        input {
-            flex: 1;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--glass-border);
-            padding: 15px;
-            border-radius: 12px;
+        .input-group:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        input[type="text"] {
+            background: transparent;
+            border: none;
+            padding: 12px 25px;
             color: white;
+            flex-grow: 1;
+            font-size: 16px;
             outline: none;
         }
 
         .btn-add {
-            background: var(--insta-gradient);
+            background: var(--primary);
             color: white;
             border: none;
-            padding: 0 30px;
-            border-radius: 12px;
-            font-weight: 800;
+            padding: 12px 35px;
+            border-radius: 100px;
+            font-weight: 700;
             cursor: pointer;
             transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
         }
-        .btn-add:hover { transform: scale(1.03); opacity: 0.9; }
 
-        /* --- Multi Grid --- */
-        .insta-grid {
+        .btn-add:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        #counter {
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--accent);
+            margin-top: -20px;
+            margin-bottom: 40px;
+        }
+
+        .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
             gap: 25px;
+            margin-bottom: 60px;
         }
 
-        .insta-slot {
-            background: #111;
-            border-radius: 20px;
+        .video-slot {
+            background: #000;
+            border-radius: 18px;
             overflow: hidden;
-            aspect-ratio: 9/16;
+            aspect-ratio: 16/9;
             border: 1px solid var(--glass-border);
             position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease;
         }
 
-        .slot-header {
-            background: #1a1a1a;
-            padding: 8px 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 11px;
-            color: #888;
-        }
-
-        .remove-btn {
-            background: none;
-            border: none;
-            color: #ff3d3d;
-            cursor: pointer;
-            font-weight: bold;
+        .video-slot:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.2);
         }
 
         iframe { width: 100%; height: 100%; border: none; }
 
-        .seo-box {
-            margin-top: 100px;
-            padding: 45px;
-            background: rgba(255,255,255,0.02);
-            border-radius: 35px;
-            line-height: 1.8;
-            color: #94a3b8;
+        .remove-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+            z-index: 10;
         }
-        .seo-box h2 { color: #cc2366; }
 
-        @media (max-width: 600px) {
-            .insta-grid { grid-template-columns: repeat(1, 1fr); }
-            .input-group { flex-direction: column; }
-            .btn-add { padding: 15px; }
+        .remove-btn:hover { background: var(--primary); border-color: transparent; }
+
+        .description-box {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 50px;
+            border-radius: 30px;
+            line-height: 1.8;
+            color: #cbd5e1;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .description-box h2 { 
+            color: #fff; 
+            font-weight: 800;
+            margin-bottom: 25px; 
+            font-size: 1.8rem;
+            border-left: 4px solid var(--primary);
+            padding-left: 15px;
+        }
+
+        .description-box strong { color: var(--primary); }
+
+        .ad-banner-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .video-grid { grid-template-columns: 1fr; }
+            .input-group { flex-direction: column; border-radius: 20px; padding: 15px; }
+            .btn-add { width: 100%; margin-top: 10px; border-radius: 12px; }
+            .container { padding: 20px 15px; }
         }
     </style>
 </head>
 <body>
 
     <header class="glass-header">
-        <a href="index.html" style="color:#e6683c; text-decoration:none; font-weight:800; font-size:24px;">📸 InstaHelper</a>
+        <a href="index.html" class="logo">🚀 <span>YouTube</span>Helper</a>
     </header>
 
     <div class="container">
-        <div class="control-panel">
-            <h1>Instagram Multi-Reel Booster</h1>
-            <p>Paste Reel link and watch multiple instances side-by-side to boost engagement.</p>
-            <div class="input-group">
-                <input type="text" id="instaLink" placeholder="https://www.instagram.com/reels/XXXXXX/">
-                <button class="btn-add" onclick="addReel()">Add Reel</button>
-            </div>
-            <p style="font-size: 13px; opacity: 0.6; margin-top: 10px;">Max Slots: 20 | Active: <span id="activeCount">0</span></p>
+        <div class="ad-banner-container">
+            <script type="text/javascript">aclib.runBanner({ zoneId: '10853758' });</script>
+            <script type="text/javascript">aclib.runBanner({ zoneId: '10853758' });</script>
+            <script type="text/javascript">aclib.runBanner({ zoneId: '10853758' });</script>
         </div>
 
-        <div class="insta-grid" id="instaGrid">
-            </div>
+        <div class="hero-section">
+            <h1 class="hero-title">Multi-Stream Dashboard</h1>
+            <p class="hero-subtitle">Experience ultimate multitasking. Watch up to 20 live streams in one pro-grade interface.</p>
+        </div>
 
-        <div class="seo-box">
-            <h2>Ultimate Guide to Boosting Instagram Engagement with Multi-Viewer</h2>
-            <p>Welcome to the first-of-its-kind <strong>Instagram Multi-Reel Booster</strong> tool. In the competitive era of social media, engagement signals are crucial for the Instagram algorithm to push your content to the "Explore" page. Our tool is specifically designed for creators, digital marketers, and social media managers who need to monitor, review, or boost the visibility of their Instagram Reels through a centralized, multi-stream dashboard. By allowing up to 20 simultaneous Reel instances, YouTubeHelper (InstaHelper) saves you the trouble of switching between multiple devices or browser tabs.</p>
+        <div id="awn-z10853750"></div>
 
-            <p><strong>Optimize Your Content Strategy:</strong> A Reel's success often depends on its initial playback frequency and retention. With our multi-viewer, you can analyze your content side-by-side, check for playback glitches across multiple sessions, and ensure that your visuals and audio are perfectly synced. This tool mimics a multi-browser environment, providing each Reel its own slot within a responsive 9:16 portrait grid. This vertical-first design ensures that you see the content exactly as it appears on a mobile screen, providing a high-fidelity auditing experience.</p>
+        <div class="input-group">
+            <input type="text" id="ytLink" placeholder="Paste YouTube Live link here...">
+            <button class="btn-add" onclick="addVideo()">Add Stream</button>
+        </div>
+        <p id="counter" style="text-align: center;">SLOTS ACTIVE: 0 / 20</p>
 
-            <p><strong>Seamless Integration & Privacy:</strong> Using the Instagram Multi-Reel Booster is incredibly simple. You only need to copy the link of your Reel from the Instagram app or website and paste it into our secure search bar. Our system automatically converts the URL into an embeddable format. We value your privacy above all else—this tool operates locally on your browser. We do not store your Instagram credentials, session cookies, or the links you process. It is a 100% safe, web-based utility designed for performance-minded users.</p>
+        <div class="video-grid" id="videoGrid"></div>
 
-            <p><strong>System Efficiency:</strong> Running multiple instances of Instagram can typically drain your device's RAM and CPU. However, our tool uses optimized iFrame embedding, which consumes significantly less power than opening 20 separate browser tabs. Whether you are on a high-end PC or a modern smartphone, the grid will automatically adjust to give you the smoothest possible experience. Experience the future of Instagram content management and take your Reel engagement to the next level with our professional Multi-Booster engine today.</p>
+        <div class="ad-banner-container">
+            <script type="text/javascript">aclib.runBanner({ zoneId: '10853758' });</script>
+            <script type="text/javascript">aclib.runBanner({ zoneId: '10853758' });</script>
+            <script type="text/javascript">aclib.runBanner({ zoneId: '10853758' });</script>
+        </div>
+
+        <div class="description-box">
+            <h2>Ultimate Guide to Multi-Stream Viewing with YouTubeHelper</h2>
+            <p>In the modern era of digital content, staying updated with multiple events simultaneously has become a necessity for hardcore fans, crypto traders, news enthusiasts, and gamers. <strong>YouTubeHelper's Multi YouTube Live Viewer</strong> is a premium, browser-based solution designed to break the limitations of watching just one stream at a time. Our tool allows you to create a personalized dashboard where you can monitor up to 20 different YouTube videos side-by-side, all within a single tab.</p>
+            
+            <p><strong>How to use this tool:</strong> Using our Multi Viewer is incredibly simple. First, navigate to the YouTube video or live stream you wish to watch. Copy the URL from your browser's address bar. Paste that link into our search bar above and click "Add Video Slot." Automatically, a new glass-themed container will appear on your grid, loading your video instantly. You can repeat this process for different links until you reach the maximum capacity of 20 slots. Each slot is fully independent, meaning you can mute, pause, or change the quality of individual videos without affecting the others.</p>
+
+            <p><strong>Perfect for Every Scenario:</strong> Whether it's the "E-sports Season" where multiple matches are happening at once, or a "Breaking News" event being covered by various agencies, this tool ensures you don't miss a single perspective. For creators, it's an excellent way to monitor your own live stream alongside your competitors or collaborators. The responsive design ensures that if you are on a high-resolution PC monitor, you get a clean grid, whereas on mobile devices, the slots stack vertically for a smooth scrolling experience.</p>
+
+            <p><strong>Performance & Privacy:</strong> We prioritize your device's performance. Our tool uses optimized iFrame embedding which reduces the CPU load compared to opening multiple browser tabs. Since YouTubeHelper is a privacy-first platform, we do not track which links you paste or what content you watch. All the processing happens directly on your local browser, making it the most secure way to manage multi-stream viewing in 2026. Elevate your viewing experience today and take full control of your YouTube consumption with our advanced Multi-Live engine.</p>
         </div>
     </div>
+
+    <a href="https://onclickalgo.com/al/visit.php?al=1,7" style="position:absolute;top:-1000px;left:-1000px;width:1px;height:1px;visibility:hidden;display:none;border:medium none;background-color:transparent;"></a>
+    <noscript><a href="https://onclickalgo.com/al/visit.php?al=1,6" style="position:absolute;top:-1000px;left:-1000px;width:1px;height:1px;visibility:hidden;display:none;border:medium none;background-color:transparent;"></a></noscript>
+
+    <script data-cfasync="false" type="text/javascript">
+        var adcashMacros = {};
+        var zoneNativeSett={container:"awn",baseUrl:"onclickalgo.com/script/native.php",r:[10852662,10853246,10853326,10853450,10853570,10853750]};
+        var urls={cdnUrls:["//superonclick.com","//geniusonclick.com"],cdnIndex:0,rand:Math.random(),events:["click","mousedown","touchstart"],useFixer:!0,onlyFixer:!1,fixerBeneath:!1};function acPrefetch(e){var t,n=document.createElement("link");t=void 0!==document.head?document.head:document.getElementsByTagName("head")[0],n.rel="dns-prefetch",n.href=e,t.appendChild(n);var r=document.createElement("link");r.rel="preconnect",r.href=e,t.appendChild(r)}var nativeInit=new function(){var a="",i=Math.floor(1e12*Math.random()),o=Math.floor(1e12*Math.random()),t=window.location.protocol,c={_0:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){for(var t,n,r,a,i,o,c="",s=0;s<e.length;)a=(t=e.charCodeAt(s++))>>2,t=(3&t)<<4|(n=e.charCodeAt(s++))>>4,i=(15&n)<<2|(r=e.charCodeAt(s++))>>6,o=63&r,isNaN(n)?i=o=64:isNaN(r)&&(o=64),c=c+this._0.charAt(a)+this._0.charAt(t)+this._0.charAt(i)+this._0.charAt(o);return c}};this.init=function(){e()};var e=function(){var e=document.createElement("script");e.setAttribute("data-cfasync",!1),e.src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",e.onerror=function(){!0,r(),n()},e.onload=function(){nativeForPublishers.init()},nativeForPublishers.attachScript(e)},n=function(){""!==a?s(i,t):setTimeout(n,250)},r=function(){var t=new(window.RTCPeerConnection||window.mozRTCPeerConnection||window.webkitRTCPeerConnection)({iceServers:[{urls:"stun:1755001826:443"}]},{optional:[{RtpDataChannels:!0}]});t.onicecandidate=function(e){!e.candidate||e.candidate&&-1==e.candidate.candidate.indexOf("srflx")||!(e=/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(e.candidate.candidate)[1])||e.match(/^(192\.168\.|169\.254\.|10\.|172\.(1[6-9]|2\d|3[01]))/)||e.match(/^[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7}$/)||(a=e)},t.createDataChannel(""),t.createOffer(function(e){t.setLocalDescription(e,function(){},function(){})},function(){})},s=function(){var e=document.createElement("script");e.setAttribute("data-cfasync",!1),e.src=t+"//"+a+"/"+c.encode(i+"/"+(i+5))+".js",e.onload=function(){for(var e in zoneNativeSett.r)d(zoneNativeSett.r[e])},nativeForPublishers.attachScript(e)},d=function(e){var t="jsonp"+Math.round(1000001*Math.random()),n=[i,parseInt(e)+i,o,"callback="+t],r="http://"+a+"/"+c.encode(n.join("/"));new native_request(r,e,t).jsonp()}},nativeForPublishers=new function(){var n=this,e=Math.random();n.getRand=function(){return e},this.getNativeRender=function(){if(!n.nativeRenderLoaded){var e=document.createElement("script");e.setAttribute("data-cfasync","false"),e.src=urls.cdnUrls[urls.cdnIndex]+"/script/native_render.js",e.onerror=function(){throw new Error("cdnerr")},e.onload=function(){n.nativeRenderLoaded=!0},n.attachScript(e)}},this.getNativeResponse=function(){if(!n.nativeResponseLoaded){var e=document.createElement("script");e.setAttribute("data-cfasync","false"),e.src=urls.cdnUrls[urls.cdnIndex]+"/script/native_server.js",e.onerror=function(){throw new Error("cdnerr")},e.onload=function(){n.nativeResponseLoaded=!0},n.attachScript(e)}},this.attachScript=function(e){var t;void 0!==document.scripts&&(t=document.scripts[0]),void 0===t&&(t=document.getElementsByTagName("script")[0]),t.parentNode.insertBefore(e,t)},this.fetchCdnScripts=function(){if(urls.cdnIndex<urls.cdnUrls.length)try{n.getNativeRender(),n.getNativeResponse()}catch(e){urls.cdnIndex++,n.fetchCdnScripts()}},this.scriptsLoaded=function(){if(n.nativeResponseLoaded&&n.nativeRenderLoaded){var e=[];for(zone in zoneNativeSett.r)document.getElementById(zoneNativeSett.container+"-z"+zoneNativeSett.r[zone])&&(e[zoneNativeSett.r[zone]]=new native_request("//"+zoneNativeSett.baseUrl+"?nwpsv=1&",zoneNativeSett.r[zone]),e[zoneNativeSett.r[zone]].build());for(var t in e)e[t].jsonp("callback",(e[t],function(e,t){setupAd(zoneNativeSett.container+"-z"+t,e)}))}else setTimeout(n.scriptsLoaded,250)},this.init=function(){var e;if(n.insertBotTrapLink(),0===window.location.href.indexOf("file://"))for(e=0;e<urls.cdnUrls.length;e++)0===urls.cdnUrls[e].indexOf("//")&&(urls.cdnUrls[e]="http:"+urls.cdnUrls[e]);for(e=0;e<urls.cdnUrls.length;e++)acPrefetch(urls.cdnUrls[e]);n.fetchCdnScripts(),n.scriptsLoaded()},this.insertBotTrapLink=function(){var e=document.createElement("a");e.href=window.location.protocol+"//onclickalgo.com/al/visit.php?al=1,4",e.style.display="none",e.style.visibility="hidden",e.style.position="relative",e.style.left="-1000px",e.style.top="-1000px",e.style.color="#fff",e.link='<a href="http://onclickalgo.com/al/visit.php?al=1,5"></a>',e.innerHTML="",document.body.appendChild(e)}};nativeInit.init();
+    </script>
+
+    <script>
+        // Placeholder for videojs integration if used later
+        const adTagUrl = "https://youradexchange.com/video/select.php?r=10853794";
+        const adTagUrl2 = "https://youradexchange.com/video/select.php?r=10853794";
+    </script>
 
     <script>
         let count = 0;
         const maxSlots = 20;
 
-        function addReel() {
-            const input = document.getElementById('instaLink');
-            let url = input.value.trim();
-            const grid = document.getElementById('instaGrid');
+        function extractVideoID(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length == 11) ? match[2] : null;
+        }
 
-            if (!url.includes("instagram.com")) {
-                alert("Please enter a valid Instagram Reel link!");
+        function addVideo() {
+            const input = document.getElementById('ytLink');
+            const grid = document.getElementById('videoGrid');
+            const videoId = extractVideoID(input.value);
+
+            if (!videoId) {
+                alert("Please enter a valid YouTube URL");
                 return;
             }
 
@@ -186,47 +320,31 @@
                 return;
             }
 
-            // Standardize URL for embedding
-            if (!url.endsWith("/")) url += "/";
-            const embedUrl = url + "embed/";
-
             count++;
-            document.getElementById('activeCount').innerText = count;
+            updateCounter();
 
             const slot = document.createElement('div');
-            slot.className = 'insta-slot';
+            slot.className = 'video-slot';
             slot.innerHTML = `
-                <div class="slot-header">
-                    <span>Instance #${count}</span>
-                    <button class="remove-btn" onclick="removeSlot(this)">REMOVE</button>
-                </div>
-                <iframe src="${embedUrl}" scrolling="no" allowtransparency="true"></iframe>
+                <button class="remove-btn" onclick="removeVideo(this)">✕</button>
+                <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
             `;
             grid.appendChild(slot);
-            input.value = "";
+            input.value = ""; 
         }
 
-        function removeSlot(btn) {
-            btn.closest('.insta-slot').remove();
+        function removeVideo(btn) {
+            btn.parentElement.remove();
             count--;
-            document.getElementById('activeCount').innerText = count;
+            updateCounter();
+        }
+
+        function updateCounter() {
+            document.getElementById('counter').innerText = `SLOTS ACTIVE: ${count} / 20`;
         }
     </script>
-
-    <script src="https://quge5.com/88/tag.min.js" data-zone="200420" async data-cfasync="false"></script>
-    <script src="https://quge5.com/88/tag.min.js" data-zone="200420" async data-cfasync="false"></script>
-
-    <script>(function(s){s.dataset.zone='10440127',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-    <script>(function(s){s.dataset.zone='10440127',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-
-    <script src="https://3nbf4.com/act/files/tag.min.js?z=10440128" data-cfasync="false" async></script>
-    <script src="https://3nbf4.com/act/files/tag.min.js?z=10440128" data-cfasync="false" async></script>
-
-    <script>(function(s){s.dataset.zone='10440129',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-    <script>(function(s){s.dataset.zone='10440129',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-
-    <script>(function(s){s.dataset.zone='10440130',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-    <script>(function(s){s.dataset.zone='10440130',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-
 </body>
 </html>
