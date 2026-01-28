@@ -3,233 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Shorts Multi-Viewer | YouTubeHelper</title>
+    <title>Multi YouTube Live Viewer | YouTubeHelper</title>
 
-   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9863GWKBRP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-9863GWKBRP');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-80JNYYX5KK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-80JNYYX5KK');
+    </script> 
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --primary: #FF3D3D;
-            --text-main: #ffffff;
+            --bg-dark: #070b14;
+            --card-bg: rgba(23, 32, 53, 0.6);
+            --primary: #ff0000;
+            --primary-glow: rgba(255, 0, 0, 0.4);
+            --accent: #3b82f6;
+            --text-main: #f8fafc;
+            --glass-border: rgba(255, 255, 255, 0.08);
         }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             margin: 0;
-            background: #0f172a;
+            background: var(--bg-dark);
+            background-image: radial-gradient(circle at 50% 0%, #1a2a4a 0%, #070b14 70%);
             color: var(--text-main);
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
+        /* --- Stylish Header --- */
         .glass-header {
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(15px);
-            padding: 15px 20px;
+            background: rgba(7, 11, 20, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--glass-border);
-            position: sticky; top: 0; z-index: 1000;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        .container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
-
-        .input-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            padding: 30px;
-            border-radius: 25px;
-            text-align: center;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .input-group {
+        .logo {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 22px;
+            letter-spacing: -0.5px;
             display: flex;
-            gap: 10px;
-            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span { color: var(--primary); }
+
+        .container { max-width: 1600px; margin: 0 auto; padding: 40px 20px; }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle { color: #94a3b8; font-size: 1.1rem; }
+
+        /* --- New Control Panel --- */
+        .input-group {
             max-width: 700px;
-            margin: 20px auto;
+            margin: 40px auto;
+            background: var(--card-bg);
+            padding: 8px;
+            border-radius: 100px;
+            display: flex;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+
+        .input-group:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px var(--primary-glow);
         }
 
         input[type="text"] {
-            flex: 1;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--glass-border);
-            padding: 15px 20px;
-            border-radius: 15px;
+            background: transparent;
+            border: none;
+            padding: 12px 25px;
             color: white;
-            outline: none;
+            flex-grow: 1;
             font-size: 16px;
+            outline: none;
         }
 
         .btn-add {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 0 30px;
-            border-radius: 15px;
+            padding: 12px 35px;
+            border-radius: 100px;
             font-weight: 700;
             cursor: pointer;
             transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
         }
 
-        .btn-add:hover { background: #ff5e5e; transform: scale(1.05); }
+        .btn-add:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--primary);
+        }
 
-        .shorts-grid {
+        #counter {
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--accent);
+            margin-top: -20px;
+            margin-bottom: 40px;
+        }
+
+        /* --- Dynamic Video Grid --- */
+        .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
         }
 
-        .short-slot {
+        .video-slot {
             background: #000;
-            border-radius: 20px;
+            border-radius: 18px;
             overflow: hidden;
-            aspect-ratio: 9/16;
-            border: 2px solid var(--glass-border);
+            aspect-ratio: 16/9;
+            border: 1px solid var(--glass-border);
             position: relative;
-            transition: 0.3s;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease;
         }
 
-        .short-slot:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .video-slot:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.2);
+        }
 
         iframe { width: 100%; height: 100%; border: none; }
 
-        .btn-remove {
+        .remove-btn {
             position: absolute;
-            top: 10px; right: 10px;
-            background: rgba(255, 61, 61, 0.8);
-            color: white; border: none;
-            border-radius: 50%; width: 30px; height: 30px;
-            cursor: pointer; font-weight: bold;
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+            z-index: 10;
         }
 
-        .content-section {
-            margin-top: 80px;
-            background: rgba(255,255,255,0.03);
+        .remove-btn:hover { background: var(--primary); border-color: transparent; }
+
+        /* --- Description Section --- */
+        .description-box {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
-            padding: 40px;
+            padding: 50px;
             border-radius: 30px;
             line-height: 1.8;
             color: #cbd5e1;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
 
-        .content-section h2 { color: var(--primary); margin-bottom: 20px; font-size: 2rem; }
+        .description-box h2 { 
+            color: #fff; 
+            font-weight: 800;
+            margin-bottom: 25px; 
+            font-size: 1.8rem;
+            border-left: 4px solid var(--primary);
+            padding-left: 15px;
+        }
 
-        @media (max-width: 600px) {
-            .shorts-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .input-group { flex-direction: column; }
-            .btn-add { padding: 15px; }
+        .description-box strong { color: var(--primary); }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .video-grid { grid-template-columns: 1fr; }
+            .input-group { flex-direction: column; border-radius: 20px; padding: 15px; }
+            .btn-add { width: 100%; margin-top: 10px; border-radius: 12px; }
+            .container { padding: 20px 15px; }
         }
     </style>
 </head>
 <body>
 
     <header class="glass-header">
-        <a href="index.html" style="color:var(--primary); text-decoration:none; font-weight:800; font-size:24px;">🚀 YouTubeHelper</a>
-        <span style="font-size: 14px; opacity: 0.7;">Shorts Multi-Viewer v2.0</span>
+        <a href="index.html" class="logo">🚀 <span>YouTube</span>Helper</a>
     </header>
 
     <div class="container">
-        <div class="input-card">
-            <h1 style="margin-bottom: 10px;">YouTube Shorts View Booster</h1>
-            <p style="opacity: 0.8;">Paste your Shorts URL to play multiple instances side-by-side.</p>
-            
-            <div class="input-group">
-                <input type="text" id="shortUrl" placeholder="https://youtube.com/shorts/abcd123...">
-                <button class="btn-add" onclick="addShort()">Add Short</button>
-            </div>
-            <p id="counter" style="margin-top: 15px; font-size: 14px;">Active Instances: 0 / 20</p>
+        <div class="hero-section">
+            <h1 class="hero-title">Multi-Stream Dashboard</h1>
+            <p class="hero-subtitle">Experience ultimate multitasking. Watch up to 20 live streams in one pro-grade interface.</p>
         </div>
 
-        <div class="shorts-grid" id="shortsGrid"></div>
+        <div class="input-group">
+            <input type="text" id="ytLink" placeholder="Paste YouTube Live link here...">
+            <button class="btn-add" onclick="addVideo()">Add Stream</button>
+        </div>
+        <p id="counter" style="text-align: center;">SLOTS ACTIVE: 0 / 20</p>
 
-        <div class="content-section">
-            <h2>Revolutionize Your Short-Form Content Strategy with YouTubeHelper</h2>
-            <p>Welcome to the most advanced <strong>YouTube Shorts Multi-Viewer</strong> available online. In the competitive world of short-form video, engagement and visibility are key. Our tool is specifically engineered to help creators, marketers, and enthusiasts view multiple YouTube Shorts simultaneously. This is not just a viewer; it's a productivity powerhouse designed for those who need to monitor content trends, analyze competitor shorts, or simply enjoy a multi-stream experience without the lag of multiple browser tabs.</p>
+        <div class="video-grid" id="videoGrid">
+            </div>
+
+        <div class="description-box">
+            <h2>Ultimate Guide to Multi-Stream Viewing with YouTubeHelper</h2>
+            <p>In the modern era of digital content, staying updated with multiple events simultaneously has become a necessity for hardcore fans, crypto traders, news enthusiasts, and gamers. <strong>YouTubeHelper's Multi YouTube Live Viewer</strong> is a premium, browser-based solution designed to break the limitations of watching just one stream at a time. Our tool allows you to create a personalized dashboard where you can monitor up to 20 different YouTube videos side-by-side, all within a single tab.</p>
             
-            <p><strong>Designed for Portrait Performance:</strong> Unlike standard video players, our Shorts viewer is optimized for the 9:16 aspect ratio. This ensures that every video fits perfectly within its "Glass Container," providing a crisp and clear viewing experience. When you add a link, our system automatically strips the unnecessary metadata and focuses purely on the video player. By default, videos are muted to comply with browser autoplay policies, allowing you to load up to 20 instances without causing an immediate audio overlap.</p>
+            <p><strong>How to use this tool:</strong> Using our Multi Viewer is incredibly simple. First, navigate to the YouTube video or live stream you wish to watch. Copy the URL from your browser's address bar. Paste that link into our search bar above and click "Add Video Slot." Automatically, a new glass-themed container will appear on your grid, loading your video instantly. You can repeat this process for different links until you reach the maximum capacity of 20 slots. Each slot is fully independent, meaning you can mute, pause, or change the quality of individual videos without affecting the others.</p>
 
-            <p><strong>Seamless User Experience:</strong> To use this tool, simply copy the URL of any YouTube Short. Our intelligent URL parser handles various formats, whether it's a direct 'shorts/' link or a standard mobile sharing link. Once you click "Add Short," a new slot is generated in our responsive grid. On a desktop, you'll see a beautiful side-by-side arrangement, while on mobile, the grid adjusts to show two videos per row, making it the perfect tool for testing how your content looks on different screen sizes.</p>
+            <p><strong>Perfect for Every Scenario:</strong> Whether it's the "E-sports Season" where multiple matches are happening at once, or a "Breaking News" event being covered by various agencies, this tool ensures you don't miss a single perspective. For creators, it's an excellent way to monitor your own live stream alongside your competitors or collaborators. The responsive design ensures that if you are on a high-resolution PC monitor, you get a clean grid, whereas on mobile devices, the slots stack vertically for a smooth scrolling experience.</p>
 
-            <p><strong>Secure, Private, and Efficient:</strong> At YouTubeHelper, we believe in the "Privacy First" philosophy. This tool operates entirely on your local machine. We do not store your video history or collect any personal data. Furthermore, using embedded iFrames is significantly more memory-efficient than opening 20 separate browser windows, ensuring that your PC or Smartphone remains fast and responsive. Whether you are a social media manager tracking viral loops or a creator boosting your own workflow, our YouTube Shorts Multi-Viewer is your go-to digital utility in 2026.</p>
+            <p><strong>Performance & Privacy:</strong> We prioritize your device's performance. Our tool uses optimized iFrame embedding which reduces the CPU load compared to opening multiple browser tabs. Since YouTubeHelper is a privacy-first platform, we do not track which links you paste or what content you watch. All the processing happens directly on your local browser, making it the most secure way to manage multi-stream viewing in 2026. Elevate your viewing experience today and take full control of your YouTube consumption with our advanced Multi-Live engine.</p>
         </div>
     </div>
 
     <script>
-        let shortCount = 0;
-        const maxShorts = 20;
+        let count = 0;
+        const maxSlots = 20;
 
-        function extractShortID(url) {
-            const regExp = /^.*(shorts\/|youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        function extractVideoID(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
             const match = url.match(regExp);
             return (match && match[2].length == 11) ? match[2] : null;
         }
 
-        function addShort() {
-            const input = document.getElementById('shortUrl');
-            const grid = document.getElementById('shortsGrid');
-            const videoId = extractShortID(input.value);
+        function addVideo() {
+            const input = document.getElementById('ytLink');
+            const grid = document.getElementById('videoGrid');
+            const videoId = extractVideoID(input.value);
 
             if (!videoId) {
-                alert("Please enter a valid YouTube Shorts URL!");
+                alert("Please enter a valid YouTube URL");
                 return;
             }
 
-            if (shortCount >= maxShorts) {
-                alert("Maximum 20 Shorts reached!");
+            if (count >= maxSlots) {
+                alert("Maximum 20 slots reached!");
                 return;
             }
 
-            shortCount++;
-            document.getElementById('counter').innerText = `Active Instances: ${shortCount} / 20`;
+            count++;
+            updateCounter();
 
             const slot = document.createElement('div');
-            slot.className = 'short-slot';
+            slot.className = 'video-slot';
             slot.innerHTML = `
-                <button class="btn-remove" onclick="removeShort(this)">X</button>
-                <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}" 
+                <button class="remove-btn" onclick="removeVideo(this)">✕</button>
+                <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen>
                 </iframe>
             `;
             grid.appendChild(slot);
-            input.value = "";
+            input.value = ""; 
         }
 
-        function removeShort(btn) {
+        function removeVideo(btn) {
             btn.parentElement.remove();
-            shortCount--;
-            document.getElementById('counter').innerText = `Active Instances: ${shortCount} / 20`;
+            count--;
+            updateCounter();
+        }
+
+        function updateCounter() {
+            document.getElementById('counter').innerText = `SLOTS ACTIVE: ${count} / 20`;
         }
     </script>
-
-    <script>(function(s){s.dataset.zone='10440032',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-    <script>(function(s){s.dataset.zone='10440032',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-
-    <script src="https://3nbf4.com/act/files/tag.min.js?z=10440033" data-cfasync="false" async></script>
-    <script src="https://3nbf4.com/act/files/tag.min.js?z=10440033" data-cfasync="false" async></script>
-
-    <script>(function(s){s.dataset.zone='10440034',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-    <script>(function(s){s.dataset.zone='10440034',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-
-    <script>(function(s){s.dataset.zone='10440035',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-    <script>(function(s){s.dataset.zone='10440035',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-
 </body>
 </html>
-
