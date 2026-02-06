@@ -266,14 +266,6 @@
             const win = document.createElement('div');
             win.className = 'browser-window';
             win.innerHTML = `
-                <div class="window-top">
-                    <div class="dot red"></div>
-                    <div class="dot yellow"></div>
-                    <div class="dot green"></div>
-                    <div class="address-bar">${rawUrl}</div>
-                    <button onclick="this.closest('.browser-window').remove(); nodes--; document.getElementById('nodeCount').innerText = nodes;" 
-                            style="background:none; border:none; color:#555; cursor:pointer; font-weight:bold; margin-left:10px;">✕</button>
-                </div>
                 <div class="iframe-container">
                     <iframe src="${embedUrl}" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
