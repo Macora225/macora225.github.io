@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi Browser Engine | YouTubeHelper</title>
+    <title>Multi Browser Engine | YouTubeHelper Pro</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
@@ -25,7 +25,6 @@
             overflow-x: hidden;
         }
 
-        /* --- Header --- */
         .glass-header {
             background: rgba(5, 7, 10, 0.8);
             backdrop-filter: blur(20px);
@@ -39,7 +38,6 @@
 
         .container { max-width: 1600px; margin: 0 auto; padding: 40px 20px; }
 
-        /* --- Input Panel --- */
         .browser-control {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
@@ -80,9 +78,10 @@
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 1px;
+            transition: transform 0.2s;
         }
+        .btn-launch:active { transform: scale(0.95); }
 
-        /* --- Multi Browser Grid --- */
         .browser-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
@@ -96,9 +95,11 @@
             overflow: hidden;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             transition: 0.3s;
+            animation: fadeIn 0.5s ease;
         }
 
-        /* Browser Top Bar UI */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
         .window-top {
             background: #222;
             padding: 8px 15px;
@@ -124,10 +125,9 @@
             white-space: nowrap;
         }
 
-        .iframe-container { width: 100%; aspect-ratio: 16/9; background: #000; }
+        .iframe-container { width: 100%; aspect-ratio: 16/9; background: #000; position: relative; }
         iframe { width: 100%; height: 100%; border: none; }
 
-        /* --- SEO Description --- */
         .info-section {
             margin-top: 100px;
             background: linear-gradient(145deg, rgba(255,255,255,0.02), rgba(0,0,0,0));
@@ -149,58 +149,60 @@
 <body>
 
     <header class="glass-header">
-        <a href="index.html" style="color:var(--primary); text-decoration:none; font-weight:800; font-size:26px;">🚀 YouTubeHelper</a>
-        <div style="font-size: 12px; letter-spacing: 2px; color: var(--secondary); font-weight: bold;">MULTI-BROWSER ENGINE v4.0</div>
+        <a href="#" style="color:var(--primary); text-decoration:none; font-weight:800; font-size:26px;">🚀 YouTubeHelper</a>
+        <div style="font-size: 12px; letter-spacing: 2px; color: var(--secondary); font-weight: bold;">HIGH-HIT ENGINE v5.0</div>
     </header>
 
     <div class="container">
         <div class="browser-control">
             <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Cloud Multi-Browser</h1>
-            <p style="opacity: 0.7;">Simulate multiple browser sessions for your content instantly.</p>
+            <p style="opacity: 0.7;">High-retention multi-session simulation. All instances launch <b>UNMUTED</b>.</p>
             
             <div class="input-wrapper">
-                <input type="text" id="targetUrl" placeholder="Paste YouTube (Long/Shorts), Insta, or FB link here...">
+                <input type="text" id="targetUrl" placeholder="Paste YouTube Link (Video or Shorts)...">
                 <button class="btn-launch" onclick="launchBrowser()">Launch Instance</button>
             </div>
-            <p style="font-size: 13px; color: var(--primary);">System Status: Ready | Active Nodes: <span id="nodeCount">0</span> | Wake Lock: <span id="wakeStatus">Inactive</span></p>
+            <p style="font-size: 13px; color: var(--primary);">
+                Status: <span id="sysStatus">Ready</span> | 
+                Active Sessions: <span id="nodeCount">0</span> | 
+                Wake Lock: <span id="wakeStatus">Inactive</span>
+            </p>
         </div>
 
-        <div class="browser-grid" id="browserGrid">
-            </div>
+        <div class="browser-grid" id="browserGrid"></div>
 
         <div class="info-section">
             <h2>Next-Generation Multi-Browser Simulation for Content Creators</h2>
             <p>Welcome to <strong>YouTubeHelper's Multi-Browser Engine</strong>, a professional-grade utility designed for advanced content management and digital simulation. In 2026, simply watching a video is not enough for data analysts and creators; you need to understand how your content performs across various simulated environments. Our Multi-Browser tool provides a "Sandboxed" experience, allowing you to run multiple instances of a YouTube video in a side-by-side grid, each acting as an independent session.</p>
             
-            <p><strong>What makes this tool "Different"?</strong> Unlike our standard Multi-Live or Shorts viewers, the Multi-Browser Engine is designed to mimic the actual look and feel of a desktop browser. Each slot comes with a custom-designed "Window Header" that includes simulation dots and a mock address bar. This is perfect for creators who want to record their screens for "Reaction" videos, tutorials, or "Social Proof" presentations. The grid is built on a liquid-layout system, meaning whether you are on a 4K monitor or a wide-screen setup, the windows will align perfectly to fill your workspace.</p>
+            <p><strong>What makes this tool "Different"?</strong> Unlike our standard Multi-Live or Shorts viewers, the Multi-Browser Engine is designed to mimic the actual look and feel of a desktop browser. Each slot comes with a custom-designed "Window Header" that includes simulation dots and a mock address bar. This is perfect for creators who want to record their screens for "Reaction" videos, tutorials, or "Social Proof" presentations.</p>
 
-            <p><strong>Technical Superiority & User Control:</strong> Every browser instance added via the "Launch Instance" button is completely isolated. We utilize optimized embed protocols to ensure that each video starts with its own set of parameters. By default, instances are initialized in a muted state to prevent "Audio Chaos" when launching up to 20 browsers simultaneously. However, users have full control over each individual window's play/pause state and volume settings. This level of granular control is what sets YouTubeHelper apart from generic multi-view websites.</p>
+            <p><strong>Technical Superiority & User Control:</strong> Every browser instance added via the "Launch Instance" button is completely isolated. We utilize optimized embed protocols to ensure that each video starts with its own set of parameters. By default, instances are initialized in an <b>unmuted state</b> with full sound to ensure high-quality engagement signals. However, users have full control over each individual window's play/pause state and volume settings.</p>
 
-            <p><strong>Optimized for Productivity:</strong> Social media managers and SEO specialists use this tool to verify video thumbnails, check live chat across different sessions, and monitor real-time playback stability. By consolidating 20 windows into one tab, you save up to 80% of your system's RAM compared to opening 20 Chrome or Firefox tabs. This makes it an ideal tool for users with mid-range laptops who still need high-end multi-tasking capabilities.</p>
+            <p><strong>Optimized for Productivity:</strong> Social media managers and SEO specialists use this tool to verify video thumbnails, check live chat across different sessions, and monitor real-time playback stability. By consolidating 20 windows into one tab, you save up to 80% of your system's RAM compared to opening 20 Chrome or Firefox tabs.</p>
 
-            <p><strong>Safety & Encryption:</strong> Your data security is at the core of the YouTubeHelper ecosystem. All browser simulations happen on the client-side (your device). No URLs, video IDs, or session data are ever transmitted to our servers. We provide a clean, ad-free, and tracker-free environment so you can focus on your content strategy without distractions. Experience the future of browser-based multi-tasking with our Multi-Browser Engine today.</p>
+            <p><strong>Safety & Encryption:</strong> Your data security is at the core of the YouTubeHelper ecosystem. All browser simulations happen on the client-side (your device). No URLs, video IDs, or session data are ever transmitted to our servers. Experience the future of browser-based multi-tasking with our Multi-Browser Engine today.</p>
         </div>
     </div>
 
     <script>
         let nodes = 0;
-        const maxNodes = 20;
-
-        // Wake Lock to prevent Sleep Mode
+        const maxNodes = 30; // Increased limit
         let wakeLock = null;
+
         async function requestWakeLock() {
             try {
-                wakeLock = await navigator.wakeLock.request('screen');
-                document.getElementById('wakeStatus').innerText = "Active ✅";
-                document.getElementById('wakeStatus').style.color = "#27c93f";
-            } catch (err) {
-                console.log(`${err.name}, ${err.message}`);
-            }
+                if ('wakeLock' in navigator) {
+                    wakeLock = await navigator.wakeLock.request('screen');
+                    document.getElementById('wakeStatus').innerText = "Active ✅";
+                    document.getElementById('wakeStatus').style.color = "#27c93f";
+                }
+            } catch (err) { console.log(err.message); }
         }
 
         function getEmbedUrl(url) {
+            let videoId = "";
             if (url.includes('youtube.com') || url.includes('youtu.be')) {
-                let videoId = "";
                 if (url.includes('shorts/')) {
                     videoId = url.split('shorts/')[1].split(/[?#]/)[0];
                 } else if (url.includes('v=')) {
@@ -210,33 +212,21 @@
                 }
 
                 if (videoId && videoId.length === 11) {
-                    return `https://www.youtube.com/embed/${videoId}?autoplay=1&unmute=0&rel=0&enablejsapi=1&origin=${window.location.origin}`;
+                    // Added: mute=0 for sound, playlist loop for retention, and widget_referrer for organic hit simulation
+                    return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=1&showinfo=0&rel=0&loop=1&playlist=${videoId}&enablejsapi=1&widget_referrer=${encodeURIComponent('https://google.com')}`;
                 }
             }
-            
-            if (url.includes('instagram.com')) {
-                let cleanUrl = url.split(/[?#]/)[0];
-                if (!cleanUrl.endsWith('/')) cleanUrl += '/';
-                return `${cleanUrl}embed/`;
-            }
-
-            if (url.includes('facebook.com')) {
-                return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=0&autoplay=1`;
-            }
-
             return null;
         }
 
         function launchBrowser() {
-            if (!wakeLock) requestWakeLock();
-
             const input = document.getElementById('targetUrl');
             const grid = document.getElementById('browserGrid');
             const rawUrl = input.value.trim();
             const embedUrl = getEmbedUrl(rawUrl);
 
             if (!embedUrl) {
-                alert("Please enter a valid YouTube, Instagram, or Facebook URL");
+                alert("Please enter a valid YouTube Video or Shorts URL");
                 return;
             }
 
@@ -245,30 +235,45 @@
                 return;
             }
 
-            nodes++;
-            document.getElementById('nodeCount').innerText = nodes;
+            if (!wakeLock) requestWakeLock();
 
-            const win = document.createElement('div');
-            win.className = 'browser-window';
-            win.innerHTML = `
-                <div class="window-top">
-                    <div class="dot red"></div>
-                    <div class="dot yellow"></div>
-                    <div class="dot green"></div>
-                    <div class="address-bar">${rawUrl}</div>
-                    <button onclick="this.closest('.browser-window').remove(); nodes--; document.getElementById('nodeCount').innerText = nodes;" 
-                            style="background:none; border:none; color:#555; cursor:pointer; font-weight:bold; margin-left:10px;">✕</button>
-                </div>
-                <div class="iframe-container">
-                    <iframe src="${embedUrl}" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            allowfullscreen>
-                    </iframe>
-                </div>
-            `;
-            grid.appendChild(win);
-            input.value = "";
+            document.getElementById('sysStatus').innerText = "Launching...";
+            
+            // Random delay to mimic human behavior (0.5 to 1.5 seconds)
+            setTimeout(() => {
+                nodes++;
+                document.getElementById('nodeCount').innerText = nodes;
+                document.getElementById('sysStatus').innerText = "Running";
+
+                const win = document.createElement('div');
+                win.className = 'browser-window';
+                win.innerHTML = `
+                    <div class="window-top">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                        <div class="address-bar">${rawUrl}</div>
+                        <button onclick="this.closest('.browser-window').remove(); nodes--; document.getElementById('nodeCount').innerText = nodes;" 
+                                style="background:none; border:none; color:#ff5f56; cursor:pointer; font-weight:bold; margin-left:10px;">✕</button>
+                    </div>
+                    <div class="iframe-container">
+                        <iframe src="${embedUrl}" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                `;
+                grid.insertBefore(win, grid.firstChild);
+                input.value = "";
+            }, Math.random() * 1000 + 500);
         }
+
+        // Keep WakeLock alive on visibility change
+        document.addEventListener('visibilitychange', async () => {
+            if (wakeLock !== null && document.visibilityState === 'visible') {
+                requestWakeLock();
+            }
+        });
     </script>
 </body>
 </html>
