@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi Browser Engine | YouTubeHelper Pro</title>
-    
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
     <style>
@@ -19,14 +18,13 @@
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             margin: 0;
-            background: #05070a;
+            background: #020408;
             color: var(--text-main);
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
         .glass-header {
-            background: rgba(5, 7, 10, 0.8);
+            background: rgba(5, 7, 10, 0.85);
             backdrop-filter: blur(20px);
             padding: 15px 25px;
             display: flex;
@@ -41,150 +39,159 @@
         .browser-control {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
-            padding: 30px;
-            border-radius: 30px;
+            padding: 40px;
+            border-radius: 35px;
             text-align: center;
             margin-bottom: 50px;
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Glow effect */
+        .browser-control::after {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(0, 242, 255, 0.05) 0%, transparent 70%);
+            pointer-events: none;
         }
 
         .input-wrapper {
-            display: flex;
-            gap: 12px;
-            max-width: 800px;
-            margin: 25px auto;
+            display: flex; gap: 15px; max-width: 850px; margin: 30px auto; position: relative; z-index: 2;
         }
 
         input[type="text"] {
-            flex: 1;
-            background: rgba(0,0,0,0.5);
-            border: 2px solid var(--glass-border);
-            padding: 15px 25px;
-            border-radius: 15px;
-            color: white;
-            outline: none;
-            transition: 0.3s;
+            flex: 1; background: rgba(0,0,0,0.6); border: 2px solid var(--glass-border);
+            padding: 18px 25px; border-radius: 18px; color: white; outline: none;
+            transition: 0.4s; font-size: 16px;
         }
 
-        input[type="text"]:focus { border-color: var(--primary); }
+        input[type="text"]:focus { border-color: var(--primary); box-shadow: 0 0 20px rgba(0, 242, 255, 0.2); }
 
         .btn-launch {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: white; border: none; padding: 0 35px; border-radius: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white; border: none; padding: 0 40px; border-radius: 18px;
             font-weight: 800; cursor: pointer; text-transform: uppercase;
-            transition: 0.3s;
+            letter-spacing: 1px; transition: 0.3s;
         }
 
+        .btn-launch:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(112, 0, 255, 0.4); }
+
         .browser-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 30px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 30px;
         }
 
         .browser-window {
-            background: #111;
-            border-radius: 18px;
-            border: 1px solid var(--glass-border);
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            background: #0f1115; border-radius: 20px; border: 1px solid var(--glass-border);
+            overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.6); transition: 0.3s;
         }
 
         .window-top {
-            background: #222; padding: 8px 15px; display: flex; align-items: center; gap: 8px;
+            background: #1a1d23; padding: 12px 18px; display: flex; align-items: center; gap: 10px;
         }
 
-        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
         .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
-        .address-bar { background: #333; height: 18px; flex: 1; border-radius: 4px; font-size: 10px; color: #888; padding-left: 10px; overflow: hidden; }
+        
+        .address-bar { 
+            background: #2a2e37; height: 24px; flex: 1; border-radius: 6px; 
+            font-size: 11px; color: #aaa; display: flex; align-items: center; 
+            padding-left: 12px; overflow: hidden; white-space: nowrap;
+        }
 
-        .iframe-container { width: 100%; aspect-ratio: 16/9; background: #000; }
+        .iframe-container { width: 100%; aspect-ratio: 16/9; background: #000; position: relative; }
         iframe { width: 100%; height: 100%; border: none; }
 
-        /* Notification Toast */
-        #status-toast {
-            position: fixed; top: 80px; right: 20px; background: var(--primary);
-            color: #000; padding: 10px 20px; border-radius: 10px; font-weight: bold;
-            display: none; z-index: 2000; animation: fadeIn 0.5s;
+        .unmute-tag {
+            position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7);
+            padding: 5px 10px; border-radius: 5px; font-size: 10px; color: var(--primary);
+            border: 1px solid var(--primary); pointer-events: none;
         }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .info-section {
-            margin-top: 100px; background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border);
-            padding: 50px; border-radius: 40px; line-height: 1.9; color: #a0aec0;
+        #status-toast {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: linear-gradient(45deg, #00f2ff, #7000ff);
+            color: white; padding: 12px 30px; border-radius: 50px; font-weight: bold;
+            display: none; z-index: 9999; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
     </style>
 </head>
 <body>
 
-    <div id="status-toast">System: Initializing Audio...</div>
+    <div id="status-toast">Ready to Boost</div>
 
     <header class="glass-header">
-        <a href="#" style="color:var(--primary); text-decoration:none; font-weight:800; font-size:26px;">🚀 YouTubeHelper</a>
-        <div style="font-size: 12px; letter-spacing: 2px; color: var(--secondary); font-weight: bold;">AUTO-UNMUTE v8.0</div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 28px;">🚀</span>
+            <span style="color:var(--primary); font-weight:800; font-size:24px; letter-spacing: -1px;">YouTubeHelper <span style="color:white">PRO</span></span>
+        </div>
+        <div style="font-size: 11px; letter-spacing: 2px; color: var(--secondary); font-weight: bold; border: 1px solid var(--secondary); padding: 5px 12px; border-radius: 20px;">
+            STABLE VIEW ENGINE v9.0
+        </div>
     </header>
 
     <div class="container">
         <div class="browser-control">
-            <h1>Cloud Multi-Browser</h1>
-            <p style="opacity: 0.7;">Zero-Click Unmute | 10s Auto-Sync | Proxy Friendly</p>
+            <h1 style="font-size: 2.8rem; margin: 0; background: linear-gradient(to right, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">High-Retention Browser</h1>
+            <p style="color: #666; margin-top: 10px;">15s Smart Sync | Advanced View Tracking | Proxy Shield</p>
             
             <div class="input-wrapper">
-                <input type="text" id="targetUrl" placeholder="Paste YouTube link or Proxyium link...">
+                <input type="text" id="targetUrl" placeholder="Enter YouTube Video or Shorts URL...">
                 <button class="btn-launch" onclick="launchBrowser()">Launch Instance</button>
             </div>
-            <p style="font-size: 13px; color: var(--primary);">Sessions: <span id="nodeCount">0</span> | Mode: <span id="runMode">Detecting...</span></p>
+            
+            <div style="display: flex; justify-content: center; gap: 20px; font-size: 13px;">
+                <div style="color: #aaa;">Status: <span style="color: #27c93f;">Online</span></div>
+                <div style="color: #aaa;">Active Nodes: <span id="nodeCount" style="color: var(--primary);">0</span></div>
+                <div style="color: #aaa;">Audio Sync: <span id="syncStatus" style="color: var(--secondary);">Waiting...</span></div>
+            </div>
         </div>
 
         <div id="browserGrid" class="browser-grid"></div>
-
-        <div class="info-section">
-            <h2>Next-Generation Multi-Browser Simulation for Content Creators</h2>
-            <p>Welcome to <strong>YouTubeHelper's Multi-Browser Engine</strong>, a professional-grade utility designed for advanced content management and digital simulation. Our tool provides a "Sandboxed" experience, allowing you to run multiple instances of a YouTube video in a side-by-side grid.</p>
-            <p><strong>Technical Superiority:</strong> The Multi-Browser Engine is designed to mimic actual desktop browsers. We utilize optimized embed protocols to ensure that each video starts with its own parameters. By default, instances are initialized in an <b>unmuted state</b> with full sound to ensure high-quality engagement signals.</p>
-        </div>
     </div>
 
     <script>
         let nodes = 0;
-        let audioUnlocked = false;
-
-        function getEmbedUrl(url) {
-            // High hit parameters for YouTube
-            if (url.includes('youtube.com') || url.includes('youtu.be')) {
-                let vID = "";
-                if (url.includes('v=')) vID = url.split('v=')[1].split('&')[0];
-                else if (url.includes('shorts/')) vID = url.split('shorts/')[1].split('?')[0];
-                else vID = url.split('.be/')[1];
-                
-                document.getElementById('runMode').innerText = "Normal Browser";
-                return `https://www.youtube.com/embed/${vID}?autoplay=1&mute=0&enablejsapi=1&loop=1&playlist=${vID}&origin=${window.location.origin}`;
-            }
-            
-            // Proxyium adjustment
-            document.getElementById('runMode').innerText = "Proxy Mode (Auto-Syncing)";
-            return url.includes('?') ? `${url}&autoplay=1&mute=0` : `${url}?autoplay=1&mute=0`;
-        }
+        let userInteracted = false;
 
         function showToast(msg) {
             const t = document.getElementById('status-toast');
             t.innerText = msg;
             t.style.display = 'block';
-            setTimeout(() => { t.style.display = 'none'; }, 3000);
+            setTimeout(() => { t.style.display = 'none'; }, 4000);
+        }
+
+        function getEmbedUrl(url) {
+            let vID = "";
+            try {
+                if (url.includes('youtube.com') || url.includes('youtu.be')) {
+                    if (url.includes('v=')) vID = url.split('v=')[1].split('&')[0];
+                    else if (url.includes('shorts/')) vID = url.split('shorts/')[1].split('?')[0].split('/')[0];
+                    else vID = url.split('.be/')[1].split('?')[0];
+                }
+            } catch(e) { return null; }
+
+            if (vID) {
+                // High Retention Parameters:
+                // enablejsapi=1 (For communication)
+                // rel=0 (No related videos)
+                // playlist (For looping/session duration)
+                return `https://www.youtube.com/embed/${vID}?autoplay=1&mute=1&enablejsapi=1&rel=0&showinfo=0&controls=1&loop=1&playlist=${vID}&origin=${window.location.origin}`;
+            }
+            return url; // Default return for Proxyium links
         }
 
         function launchBrowser() {
-            // "Launch" click is the trigger to unlock browser audio
-            if (!audioUnlocked) {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                audioCtx.resume();
-                audioUnlocked = true;
+            // First click interaction to unlock browser audio policy
+            if (!userInteracted) {
+                userInteracted = true;
+                document.getElementById('syncStatus').innerText = "Active";
             }
 
             const input = document.getElementById('targetUrl');
             const grid = document.getElementById('browserGrid');
             const url = input.value.trim();
-            if(!url) return;
+            
+            if(!url) { alert("Please paste a link first!"); return; }
 
             const finalUrl = getEmbedUrl(url);
             nodes++;
@@ -192,37 +199,44 @@
 
             const win = document.createElement('div');
             win.className = 'browser-window';
+            const frameId = `frame-${Date.now()}`; // Unique ID
+
             win.innerHTML = `
                 <div class="window-top">
                     <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
                     <div class="address-bar">${url}</div>
-                    <button onclick="this.closest('.browser-window').remove(); nodes--; updateCount();" style="background:none; border:none; color:#ff5f56; cursor:pointer;">✕</button>
+                    <button onclick="this.closest('.browser-window').remove();" style="background:none; border:none; color:#ff5f56; cursor:pointer; font-weight:bold;">✕</button>
                 </div>
                 <div class="iframe-container">
-                    <iframe id="frame-${nodes}" src="${finalUrl}" allow="autoplay; encrypted-media"></iframe>
+                    <div class="unmute-tag" id="tag-${frameId}">Waiting 15s for Unmute...</div>
+                    <iframe id="${frameId}" 
+                            src="${finalUrl}" 
+                            allow="autoplay; encrypted-media; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
                 </div>`;
             
             grid.insertBefore(win, grid.firstChild);
             input.value = "";
 
-            // AUTOMATIC UNMUTE AFTER 10 SECONDS
+            // --- THE 15 SECOND SMART UNMUTE LOGIC ---
             setTimeout(() => {
-                const currentFrame = document.getElementById(`frame-${nodes}`);
+                const currentFrame = document.getElementById(frameId);
+                const tag = document.getElementById(`tag-${frameId}`);
+                
                 if (currentFrame) {
-                    try {
-                        // YouTube API command push
-                        currentFrame.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '*');
-                        currentFrame.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-                        showToast(`Session ${nodes} Unmuted ✅`);
-                    } catch (e) {
-                        console.log("Auto-unmute triggered for Proxy");
+                    // Send Unmute Command to YouTube API
+                    currentFrame.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '*');
+                    currentFrame.contentWindow.postMessage('{"event":"command","func":"setVolume","args":[100]}', '*');
+                    
+                    if(tag) {
+                        tag.innerHTML = "Audio Synchronized ✅";
+                        tag.style.borderColor = "#27c93f";
+                        tag.style.color = "#27c93f";
                     }
+                    showToast(`Instance Boosted: View & Audio Active`);
                 }
-            }, 10000); // 10 Seconds Delay
-        }
-
-        function updateCount() {
-            document.getElementById('nodeCount').innerText = nodes;
+            }, 15000); // 15 Seconds Delay for View Stability
         }
     </script>
 </body>
