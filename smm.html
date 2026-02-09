@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMM Boost Pro | Cloud Terminal Engine</title>
+    <title>SMM Boost Pro | HF Cloud Engine</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -23,12 +23,12 @@
             <div class="flex justify-between items-center p-3 border-b border-slate-700 bg-slate-900/50">
                 <div class="flex items-center gap-2">
                     <span id="statusDot" class="w-2 h-2 bg-slate-500 rounded-full"></span>
-                    <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Live Engine Monitor</span>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">HF Engine Monitor</span>
                 </div>
                 <div class="text-[10px] text-blue-400 font-mono" id="lastUpdated">System: Idle</div>
             </div>
             <div class="aspect-video relative bg-slate-900">
-                <img id="livePreview" src="https://via.placeholder.com/1280x720/0f172a/3b82f6?text=Waiting+for+Engine+Start..." 
+                <img id="livePreview" src="https://via.placeholder.com/1280x720/0f172a/3b82f6?text=Waiting+for+Hugging+Face+Start..." 
                      class="w-full h-full object-contain" alt="Live View">
             </div>
         </div>
@@ -37,30 +37,30 @@
             <form id="orderForm" class="space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="md:col-span-2">
-                        <label class="text-[10px] font-bold uppercase text-blue-400 ml-1">Video Link</label>
+                        <label class="text-[10px] font-bold uppercase text-blue-400 ml-1">Video Link (YouTube)</label>
                         <input type="url" id="videoUrl" required placeholder="https://www.youtube.com/watch?v=..." 
                                class="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 text-sm">
                     </div>
                     <div>
-                        <label class="text-[10px] font-bold uppercase text-blue-400 ml-1">Views</label>
+                        <label class="text-[10px] font-bold uppercase text-blue-400 ml-1">Views Count</label>
                         <input type="number" id="viewsCount" value="10" 
                                class="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none text-sm">
                     </div>
                     <div>
-                        <label class="text-[10px] font-bold uppercase text-blue-400 ml-1">WatchTime (s)</label>
+                        <label class="text-[10px] font-bold uppercase text-blue-400 ml-1">WatchTime (Seconds)</label>
                         <input type="number" id="watchTime" value="60" 
                                class="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none text-sm">
                     </div>
                 </div>
                 <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-4 rounded-xl transition-all uppercase tracking-widest text-sm">
-                    Launch Boost Engine 🚀
+                    Launch HF Boost Engine 🚀
                 </button>
             </form>
         </div>
 
         <div class="glass rounded-xl overflow-hidden border border-slate-800 shadow-2xl">
             <div class="bg-slate-800/50 px-4 py-2 border-b border-slate-700 flex justify-between items-center">
-                <span class="text-[10px] font-mono text-slate-400 uppercase tracking-widest">Backend Deployment Logs</span>
+                <span class="text-[10px] font-mono text-slate-400 uppercase tracking-widest">HF Space Logs</span>
                 <div class="flex gap-1">
                     <div class="w-2 h-2 rounded-full bg-slate-700"></div>
                     <div class="w-2 h-2 rounded-full bg-slate-700"></div>
@@ -77,53 +77,36 @@
         const liveImg = document.getElementById('livePreview');
         const lastUpdatedText = document.getElementById('lastUpdated');
         const statusDot = document.getElementById('statusDot');
-        const API_BASE = "https://macora225-github-io-1.onrender.com";
+        const btn = document.getElementById('submitBtn');
+
+        // YAHAN APNA HUGGING FACE URL DAALEIN
+        // Format: https://USERNAME-SPACENAME.hf.space
+        const API_BASE = "https://leonardo47s-youtube.hf.space"; 
         
-        let lastLogIndex = 0;
         let isRunning = false;
 
         function addLog(msg, type = 'info') {
             const div = document.createElement('div');
-            const colors = { info: 'text-blue-400', success: 'text-emerald-400', error: 'text-red-400', node: 'text-yellow-400' };
+            const colors = { info: 'text-blue-400', success: 'text-emerald-400', error: 'text-red-400' };
             div.className = `py-0.5 ${colors[type] || 'text-slate-400'}`;
             div.innerHTML = `<span class="opacity-40 mr-2">${new Date().toLocaleTimeString()}</span> > ${msg}`;
             terminal.appendChild(div);
             terminal.scrollTop = terminal.scrollHeight;
         }
 
-        // --- Screenshot Update Function ---
+        // Live Screenshot fetch karne ka logic
         function updateLiveView() {
             if(!isRunning) return;
             const timestamp = new Date().getTime();
-            // Cache bust karne ke liye timestamp zaroori hai
+            // index.js mein /live-check endpoint screenshot bhejta hai
             liveImg.src = `${API_BASE}/live-check?t=${timestamp}`;
             lastUpdatedText.innerText = "Live: " + new Date().toLocaleTimeString();
             statusDot.className = "w-2 h-2 bg-red-500 animate-pulse rounded-full";
         }
 
-        // --- Real Log Polling (Backend se asli logs mangwana) ---
-        async function pollLogs() {
-            if(!isRunning) return;
-            try {
-                // Maan lo backend par /api/logs endpoint hai jo activity return karta hai
-                const res = await fetch(`${API_BASE}/api/get-logs`); 
-                const data = await res.json();
-                
-                if(data.logs && data.logs.length > lastLogIndex) {
-                    const newLogs = data.logs.slice(lastLogIndex);
-                    newLogs.forEach(log => {
-                        addLog(log.message, log.type);
-                    });
-                    lastLogIndex = data.logs.length;
-                }
-            } catch (err) {
-                console.error("Polling error:", err);
-            }
-        }
-
         document.getElementById('orderForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = document.getElementById('submitBtn');
+            
             const data = {
                 channel_url: document.getElementById('videoUrl').value,
                 views_count: parseInt(document.getElementById('viewsCount').value),
@@ -131,9 +114,9 @@
             };
 
             btn.disabled = true;
-            btn.innerHTML = "<i class='fas fa-spinner fa-spin mr-2'></i>BOOTING CLOUD ENGINE...";
-            terminal.innerHTML = ""; // Clear purane logs
-            addLog("Establishing Secure Tunnel...", "info");
+            btn.innerHTML = "<i class='fas fa-spinner fa-spin mr-2'></i>BOOTING HF ENGINE...";
+            terminal.innerHTML = ""; 
+            addLog("Connecting to Hugging Face Cloud Tunnel...", "info");
 
             try {
                 const res = await fetch(`${API_BASE}/api/real-view-boost`, {
@@ -143,19 +126,19 @@
                 });
 
                 if (res.ok) {
+                    const result = await res.json();
                     isRunning = true;
-                    addLog("Tunnel Established. Engine Online.", "success");
+                    addLog(result.message || "Engine Online on HF Space.", "success");
                     
-                    // Har 3 second me screenshot update karo
-                    setInterval(updateLiveView, 3000);
-                    
-                    // Har 2 second me backend se asli logs mangwao
-                    setInterval(pollLogs, 2000);
+                    // Screenshot refresh cycle start karein
+                    setInterval(updateLiveView, 5000);
                     
                     btn.innerHTML = "ENGINE RUNNING ⚡";
+                } else {
+                    throw new Error("Server Response Error");
                 }
             } catch (err) {
-                addLog("Deployment Failed: " + err.message, "error");
+                addLog("Connection Failed: Check if HF Space is Public/Awake", "error");
                 btn.disabled = false;
                 btn.innerHTML = "Launch Boost Engine 🚀";
             }
