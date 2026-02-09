@@ -16,7 +16,7 @@ const http = require('http');
 const { URL } = require('url'); // Added URL import
 
 const app = express();
-const PORT = process.env.PORT || 10000; 
+const PORT = process.env.PORT || 7860;  
 
 // --- GEMINI KEY CONFIGURATION ---
 let GEMINI_KEY;
