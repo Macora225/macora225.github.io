@@ -3,80 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud Browser Stream</title>
+    <title>Cloud Instance | Full View</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; }
-        #browser-viewport { width: 100vw; height: 100vh; cursor: crosshair; display: block; object-fit: contain; }
-        .address-bar { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 60%; 
-                      background: rgba(255,255,255,0.9); padding: 8px 15px; border-radius: 30px; 
-                      display: flex; gap: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 100; transition: opacity 0.3s; }
-        .address-bar:hover { opacity: 1; }
-        .address-bar.hidden { opacity: 0.1; }
-        #url-input { flex: 1; border: none; outline: none; background: transparent; font-size: 14px; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #f8f9fa; }
+        /* Browser viewport poori screen cover karega */
+        #browser-viewport { 
+            width: 100vw; 
+            height: 100vh; 
+            cursor: crosshair; 
+            display: block; 
+            object-fit: contain; 
+        }
+        /* Navigation bar sirf hover par dikhega */
+        .nav-overlay {
+            position: absolute;
+            top: -60px; /* Shuruat mein hidden */
+            left: 0; width: 100%;
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: top 0.3s ease;
+            z-index: 1000;
+        }
+        body:hover .nav-overlay { top: 0; }
+        #url-bar {
+            flex: 1;
+            margin: 0 15px;
+            padding: 8px 15px;
+            background: #f1f3f4;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="address-bar" id="nav-bar">
-        <button onclick="doAction('back')" class="text-gray-600"><i class="fas fa-arrow-left"></i></button>
-        <input type="text" id="url-input" placeholder="Enter URL or Search..." onkeyup="if(event.key==='Enter') doAction('goto')">
-        <button onclick="doAction('goto')" class="bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-bold">GO</button>
+    <div class="nav-overlay">
+        <i class="fas fa-lock text-gray-400 mr-2 text-sm"></i>
+        <input type="text" id="url-bar" placeholder="Enter URL to navigate..." onkeyup="if(event.key==='Enter') navigate()">
+        <button onclick="navigate()" class="bg-blue-600 text-white px-5 py-1.5 rounded-full text-sm font-medium">Load Site</button>
     </div>
 
-    <img id="browser-viewport" src="" onclick="handleBrowserClick(event)" alt="Cloud View">
+    <img id="browser-viewport" src="" onclick="handleClick(event)" alt="Cloud Screen">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script>
         const API_BASE = "https://leonardo47s-youtube.hf.space"; 
         const viewport = document.getElementById('browser-viewport');
-        const urlInput = document.getElementById('url-input');
-        const navBar = document.getElementById('nav-bar');
+        const urlInput = document.getElementById('url-bar');
 
-        // 1. Har 1 second mein screen update hogi (Live View)
-        async function streamScreen() {
-            try {
-                const timestamp = new Date().getTime();
-                viewport.src = `${API_BASE}/live-check?t=${timestamp}`;
-            } catch (e) {}
+        // 1. Live Streaming Loop (Har 800ms mein update)
+        function startStream() {
+            const timestamp = new Date().getTime();
+            // Naya image object caching issues se bachne ke liye
+            const img = new Image();
+            img.onload = () => viewport.src = img.src;
+            img.src = `${API_BASE}/live-check?t=${timestamp}`;
         }
-        setInterval(streamScreen, 1000); 
+        setInterval(startStream, 800);
 
-        // 2. Click Handling Logic
-        async function handleBrowserClick(e) {
+        // 2. Click Handling (X, Y Coordinates transfer)
+        async function handleClick(e) {
             const rect = viewport.getBoundingClientRect();
-            
-            // Mouse coordinates ko Puppeteer ke 1920x1080 resolution mein convert karna
+            // Image resolution 1920x1080 ke hisab se scale karna
             const scaleX = 1920 / rect.width;
             const scaleY = 1080 / rect.height;
             const x = Math.round((e.clientX - rect.left) * scaleX);
             const y = Math.round((e.clientY - rect.top) * scaleY);
 
-            await sendAction('click', { x, y });
+            await fetch(`${API_BASE}/api/browser-interact`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'click', x, y })
+            });
         }
 
-        // 3. Action Sender
-        async function doAction(type) {
-            let val = urlInput.value;
-            await sendAction(type, { value: val });
+        // 3. Navigation Logic
+        async function navigate() {
+            const target = urlInput.value;
+            if(!target) return;
+            await fetch(`${API_BASE}/api/browser-interact`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'goto', value: target })
+            });
         }
-
-        async function sendAction(action, data) {
-            try {
-                await fetch(`${API_BASE}/api/browser-control`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action, ...data })
-                });
-            } catch (err) { console.error("Action Failed", err); }
-        }
-
-        // Mouse move hone par navbar dikhana
-        document.addEventListener('mousemove', () => {
-            navBar.classList.remove('hidden');
-            clearTimeout(window.navTimeout);
-            window.navTimeout = setTimeout(() => navBar.classList.add('hidden'), 3000);
-        });
     </script>
 </body>
 </html>
