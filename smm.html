@@ -28,7 +28,7 @@
                 <div class="text-[10px] text-blue-400 font-mono" id="lastUpdated">System: Idle</div>
             </div>
             <div class="aspect-video relative bg-slate-900">
-                <img id="livePreview" src="https://via.placeholder.com/1280x720/0f172a/3b82f6?text=Waiting+for+Hugging+Face+Start..." 
+                <img id="livePreview" src="https://via.placeholder.com/1280x720/0f172a/3b82f6?text=Waiting+for+Hugging+Face+Engine..." 
                      class="w-full h-full object-contain" alt="Live View">
             </div>
         </div>
@@ -37,17 +37,17 @@
             <form id="orderForm" class="space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="md:col-span-2">
-                        <label class="text-[10px] font-bold uppercase text-blue-400 ml-1">Video Link (YouTube)</label>
+                        <label class="text-[10px] font-bold uppercase text-blue-400 ml-1">YouTube Link</label>
                         <input type="url" id="videoUrl" required placeholder="https://www.youtube.com/watch?v=..." 
                                class="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 text-sm">
                     </div>
                     <div>
-                        <label class="text-[10px] font-bold uppercase text-blue-400 ml-1">Views Count</label>
+                        <label class="text-[10px] font-bold uppercase text-blue-400 ml-1">Views</label>
                         <input type="number" id="viewsCount" value="10" 
                                class="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none text-sm">
                     </div>
                     <div>
-                        <label class="text-[10px] font-bold uppercase text-blue-400 ml-1">WatchTime (Seconds)</label>
+                        <label class="text-[10px] font-bold uppercase text-blue-400 ml-1">WatchTime (s)</label>
                         <input type="number" id="watchTime" value="60" 
                                class="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none text-sm">
                     </div>
@@ -60,14 +60,14 @@
 
         <div class="glass rounded-xl overflow-hidden border border-slate-800 shadow-2xl">
             <div class="bg-slate-800/50 px-4 py-2 border-b border-slate-700 flex justify-between items-center">
-                <span class="text-[10px] font-mono text-slate-400 uppercase tracking-widest">HF Space Logs</span>
+                <span class="text-[10px] font-mono text-slate-400 uppercase tracking-widest">HuggingFace Real-Time Logs</span>
                 <div class="flex gap-1">
                     <div class="w-2 h-2 rounded-full bg-slate-700"></div>
                     <div class="w-2 h-2 rounded-full bg-slate-700"></div>
                 </div>
             </div>
             <div id="terminalBody" class="p-4 h-48 overflow-y-auto font-mono text-[12px] terminal-scroll bg-black/40">
-                <div class="text-slate-500">Ready for connection...<span class="cursor-blink">_</span></div>
+                <div class="text-slate-500">Awaiting Connection to HF Space...<span class="cursor-blink">_</span></div>
             </div>
         </div>
     </div>
@@ -77,36 +77,45 @@
         const liveImg = document.getElementById('livePreview');
         const lastUpdatedText = document.getElementById('lastUpdated');
         const statusDot = document.getElementById('statusDot');
-        const btn = document.getElementById('submitBtn');
-
-        // YAHAN APNA HUGGING FACE URL DAALEIN
-        // Format: https://USERNAME-SPACENAME.hf.space
+        
+        // APNA HUGGING FACE URL DALEIN
         const API_BASE = "https://leonardo47s-youtube.hf.space"; 
         
+        let lastLogIndex = 0;
         let isRunning = false;
 
         function addLog(msg, type = 'info') {
             const div = document.createElement('div');
-            const colors = { info: 'text-blue-400', success: 'text-emerald-400', error: 'text-red-400' };
+            const colors = { info: 'text-blue-400', success: 'text-emerald-400', error: 'text-red-400', node: 'text-yellow-400' };
             div.className = `py-0.5 ${colors[type] || 'text-slate-400'}`;
             div.innerHTML = `<span class="opacity-40 mr-2">${new Date().toLocaleTimeString()}</span> > ${msg}`;
             terminal.appendChild(div);
             terminal.scrollTop = terminal.scrollHeight;
         }
 
-        // Live Screenshot fetch karne ka logic
         function updateLiveView() {
             if(!isRunning) return;
-            const timestamp = new Date().getTime();
-            // index.js mein /live-check endpoint screenshot bhejta hai
-            liveImg.src = `${API_BASE}/live-check?t=${timestamp}`;
+            liveImg.src = `${API_BASE}/live-check?t=${new Date().getTime()}`;
             lastUpdatedText.innerText = "Live: " + new Date().toLocaleTimeString();
             statusDot.className = "w-2 h-2 bg-red-500 animate-pulse rounded-full";
         }
 
+        async function pollLogs() {
+            if(!isRunning) return;
+            try {
+                const res = await fetch(`${API_BASE}/api/get-logs`); 
+                const data = await res.json();
+                if(data.logs && data.logs.length > lastLogIndex) {
+                    const newLogs = data.logs.slice(lastLogIndex);
+                    newLogs.forEach(log => addLog(log.message, log.type));
+                    lastLogIndex = data.logs.length;
+                }
+            } catch (err) { console.error("Polling error:", err); }
+        }
+
         document.getElementById('orderForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+            const btn = document.getElementById('submitBtn');
             const data = {
                 channel_url: document.getElementById('videoUrl').value,
                 views_count: parseInt(document.getElementById('viewsCount').value),
@@ -116,7 +125,7 @@
             btn.disabled = true;
             btn.innerHTML = "<i class='fas fa-spinner fa-spin mr-2'></i>BOOTING HF ENGINE...";
             terminal.innerHTML = ""; 
-            addLog("Connecting to Hugging Face Cloud Tunnel...", "info");
+            addLog("Establishing Secure Tunnel to HF Space...", "info");
 
             try {
                 const res = await fetch(`${API_BASE}/api/real-view-boost`, {
@@ -126,19 +135,14 @@
                 });
 
                 if (res.ok) {
-                    const result = await res.json();
                     isRunning = true;
-                    addLog(result.message || "Engine Online on HF Space.", "success");
-                    
-                    // Screenshot refresh cycle start karein
-                    setInterval(updateLiveView, 5000);
-                    
+                    addLog("HF Engine Online. Task Initiated.", "success");
+                    setInterval(updateLiveView, 3000); // 3 sec screenshot refresh
+                    setInterval(pollLogs, 2000);       // 2 sec logs refresh
                     btn.innerHTML = "ENGINE RUNNING ⚡";
-                } else {
-                    throw new Error("Server Response Error");
                 }
             } catch (err) {
-                addLog("Connection Failed: Check if HF Space is Public/Awake", "error");
+                addLog("Failed to reach HF: " + err.message, "error");
                 btn.disabled = false;
                 btn.innerHTML = "Launch Boost Engine 🚀";
             }
