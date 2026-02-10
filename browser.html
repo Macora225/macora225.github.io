@@ -3,96 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud Instance | Full View</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Cloud Chrome - Remote Browser</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #f8f9fa; }
-        /* Browser viewport poori screen cover karega */
-        #browser-viewport { 
-            width: 100vw; 
-            height: 100vh; 
-            cursor: crosshair; 
-            display: block; 
-            object-fit: contain; 
-        }
-        /* Navigation bar sirf hover par dikhega */
-        .nav-overlay {
-            position: absolute;
-            top: -60px; /* Shuruat mein hidden */
-            left: 0; width: 100%;
-            height: 60px;
-            background: white;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: top 0.3s ease;
-            z-index: 1000;
-        }
-        body:hover .nav-overlay { top: 0; }
-        #url-bar {
-            flex: 1;
-            margin: 0 15px;
-            padding: 8px 15px;
-            background: #f1f3f4;
-            border-radius: 20px;
-            border: none;
-            outline: none;
-            font-size: 14px;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #35363a; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+
+        /* Chrome Tab Bar */
+        .tab-bar { background-color: #202124; height: 40px; display: flex; align-items: flex-end; padding-left: 10px; }
+        .tab { background-color: #35363a; color: white; padding: 8px 30px; border-radius: 10px 10px 0 0; font-size: 12px; position: relative; display: flex; align-items: center; gap: 10px; border-bottom: none; }
+        .tab i { font-size: 14px; color: #4285f4; }
+
+        /* Chrome Toolbar (URL Bar Area) */
+        .toolbar { background-color: #35363a; height: 45px; display: flex; align-items: center; padding: 0 10px; gap: 15px; border-bottom: 1px solid #444; }
+        .nav-buttons { display: flex; gap: 15px; color: #e8eaed; font-size: 16px; }
+        .nav-buttons i { cursor: pointer; }
+        .nav-buttons i:hover { color: #fff; }
+
+        .url-bar-container { flex-grow: 1; background-color: #202124; height: 30px; border-radius: 20px; display: flex; align-items: center; padding: 0 15px; border: 1px solid #5f6368; }
+        .url-bar-container i { color: #9aa0a6; margin-right: 10px; font-size: 13px; }
+        #urlInput { background: transparent; border: none; color: white; width: 100%; outline: none; font-size: 14px; }
+
+        /* Browser Content (The Screen) */
+        #browser-viewport { flex-grow: 1; position: relative; background: #000; overflow: hidden; display: flex; justify-content: center; align-items: center; }
+        #screen { max-width: 100%; max-height: 100%; cursor: default; }
+
+        /* Status Bar */
+        .status-bar { height: 25px; background: #202124; color: #9aa0a6; font-size: 11px; display: flex; align-items: center; padding-left: 10px; }
     </style>
 </head>
 <body>
 
-    <div class="nav-overlay">
-        <i class="fas fa-lock text-gray-400 mr-2 text-sm"></i>
-        <input type="text" id="url-bar" placeholder="Enter URL to navigate..." onkeyup="if(event.key==='Enter') navigate()">
-        <button onclick="navigate()" class="bg-blue-600 text-white px-5 py-1.5 rounded-full text-sm font-medium">Load Site</button>
+    <div class="tab-bar">
+        <div class="tab"><i class="fab fa-chrome"></i> New Tab</div>
     </div>
 
-    <img id="browser-viewport" src="" onclick="handleClick(event)" alt="Cloud Screen">
+    <div class="toolbar">
+        <div class="nav-buttons">
+            <i class="fas fa-arrow-left" onclick="control('back')"></i>
+            <i class="fas fa-arrow-right" onclick="control('forward')"></i>
+            <i class="fas fa-redo" onclick="control('reload')"></i>
+            <i class="fas fa-home" onclick="control('home')"></i>
+        </div>
+        <div class="url-bar-container">
+            <i class="fas fa-lock"></i>
+            <input type="text" id="urlInput" placeholder="Search Google or type a URL" onkeydown="if(event.key==='Enter') navigate()">
+        </div>
+    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <div id="browser-viewport">
+        <img id="screen" src="" alt="Connecting to Cloud Browser...">
+    </div>
+
+    <div class="status-bar">Connected to: leonardo47s-youtube.hf.space | Desktop Mode</div>
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <script>
-        const API_BASE = "https://leonardo47s-youtube.hf.space"; 
-        const viewport = document.getElementById('browser-viewport');
-        const urlInput = document.getElementById('url-bar');
+        const API_BASE = "https://leonardo47s-youtube.hf.space";
+        const socket = io(API_BASE);
+        const screen = document.getElementById('screen');
+        const urlInput = document.getElementById('urlInput');
 
-        // 1. Live Streaming Loop (Har 800ms mein update)
-        function startStream() {
-            const timestamp = new Date().getTime();
-            // Naya image object caching issues se bachne ke liye
-            const img = new Image();
-            img.onload = () => viewport.src = img.src;
-            img.src = `${API_BASE}/live-check?t=${timestamp}`;
-        }
-        setInterval(startStream, 800);
+        // 1. Receive Feed from Puppeteer
+        socket.on('screen', (data) => {
+            screen.src = 'data:image/jpeg;base64,' + data;
+        });
 
-        // 2. Click Handling (X, Y Coordinates transfer)
-        async function handleClick(e) {
-            const rect = viewport.getBoundingClientRect();
-            // Image resolution 1920x1080 ke hisab se scale karna
-            const scaleX = 1920 / rect.width;
-            const scaleY = 1080 / rect.height;
-            const x = Math.round((e.clientX - rect.left) * scaleX);
-            const y = Math.round((e.clientY - rect.top) * scaleY);
-
-            await fetch(`${API_BASE}/api/browser-interact`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ action: 'click', x, y })
-            });
+        // 2. Navigation
+        function navigate() {
+            let url = urlInput.value;
+            if (!url.startsWith('http')) url = 'https://google.com/search?q=' + url;
+            socket.emit('goto', url);
         }
 
-        // 3. Navigation Logic
-        async function navigate() {
-            const target = urlInput.value;
-            if(!target) return;
-            await fetch(`${API_BASE}/api/browser-interact`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ action: 'goto', value: target })
-            });
+        // 3. Mouse Controls (X, Y coordinates)
+        screen.addEventListener('click', (e) => {
+            const rect = screen.getBoundingClientRect();
+            const x = (e.clientX - rect.left) * (1280 / rect.width);
+            const y = (e.clientY - rect.top) * (720 / rect.height);
+            socket.emit('mouse-click', { x, y });
+        });
+
+        // 4. Keyboard Controls
+        window.addEventListener('keydown', (e) => {
+            // Stop keys like F5 or Backspace from refreshing the actual laptop browser
+            if (document.activeElement !== urlInput) {
+                socket.emit('key-press', e.key);
+                if(['Backspace', 'Tab', 'Enter'].includes(e.key)) e.preventDefault();
+            }
+        });
+
+        function control(action) {
+            socket.emit('browser-control', action);
         }
     </script>
 </body>
