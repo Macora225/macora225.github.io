@@ -3,50 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Cloud Chrome</title>
+    <title>Cloud Chrome</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: #35363a; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
-        .toolbar { background-color: #35363a; height: 50px; display: flex; align-items: center; padding: 0 10px; gap: 10px; border-bottom: 1px solid #444; }
-        .url-bar { flex-grow: 1; background: #202124; border-radius: 20px; padding: 5px 15px; border: 1px solid #5f6368; display: flex; align-items: center; }
-        #urlInput { background: transparent; border: none; color: white; width: 100%; outline: none; }
-        .nav-btn { color: white; cursor: pointer; padding: 5px; width: 30px; text-align: center; }
-        #browser-viewport { flex-grow: 1; background: #000; display: flex; justify-content: center; align-items: flex-start; overflow: auto; }
-        #screen { width: 100%; max-width: 1280px; cursor: crosshair; background: #fff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background-color: #202124; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+        
+        /* Chrome Style Toolbar */
+        .chrome-toolbar { 
+            background-color: #35363a; 
+            padding: 8px 10px; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px;
+            border-bottom: 1px solid #202124;
+        }
+
+        .nav-icons { display: flex; gap: 15px; color: #e8eaed; font-size: 14px; }
+        .nav-icons i { cursor: pointer; padding: 8px; border-radius: 50%; transition: 0.2s; }
+        .nav-icons i:hover { background-color: rgba(255,255,255,0.1); }
+
+        .address-bar { 
+            flex-grow: 1; 
+            background-color: #202124; 
+            border-radius: 20px; 
+            display: flex; 
+            align-items: center; 
+            padding: 5px 15px; 
+            border: 1px solid transparent;
+        }
+        .address-bar:focus-within { border: 1px solid #8ab4f8; }
+        
+        #urlInput { 
+            background: transparent; 
+            border: none; 
+            color: white; 
+            width: 100%; 
+            outline: none; 
+            margin-left: 10px;
+            font-size: 14px;
+        }
+
+        /* Viewport where the screen is shown */
+        #browser-container { 
+            flex-grow: 1; 
+            background-color: #000; 
+            display: flex; 
+            justify-content: center; 
+            align-items: flex-start; 
+            overflow: hidden;
+            position: relative;
+        }
+
+        #screen { 
+            width: 100%; 
+            height: auto; 
+            max-width: 1280px; 
+            cursor: crosshair; 
+            image-rendering: -webkit-optimize-contrast; /* Sharper image */
+        }
+
+        /* Status indicator */
+        .status-dot { width: 8px; height: 8px; background: #34a853; border-radius: 50%; display: inline-block; }
     </style>
 </head>
 <body>
-    <div class="toolbar">
-        <div class="nav-btn" onclick="control('back')"><i class="fas fa-arrow-left"></i></div>
-        <div class="nav-btn" onclick="control('reload')"><i class="fas fa-redo"></i></div>
-        <div class="url-bar">
-            <input type="text" id="urlInput" placeholder="Enter URL and press Enter" onkeydown="if(event.key==='Enter') navigate()">
+
+    <div class="chrome-toolbar">
+        <div class="nav-icons">
+            <i class="fas fa-arrow-left" onclick="control('back')"></i>
+            <i class="fas fa-redo" onclick="control('reload')"></i>
+        </div>
+        <div class="address-bar">
+            <i class="fas fa-lock" style="color: #9aa0a6; font-size: 12px;"></i>
+            <input type="text" id="urlInput" placeholder="Search Google or type a URL" onkeydown="if(event.key==='Enter') navigate()">
+        </div>
+        <div style="color: #9aa0a6; font-size: 12px; margin-right: 10px;">
+            <span class="status-dot"></span> Online
         </div>
     </div>
-    <div id="browser-viewport">
+
+    <div id="browser-container">
         <img id="screen" src="" alt="Starting Cloud Chrome...">
     </div>
 
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <script>
-        const socket = io(); // Hugging Face par same origin use hota hai
+        // AAPKA HF URL
+        const API_BASE = "https://leonardo47s-youtube.hf.space";
+        const socket = io(API_BASE); 
+        
         const screen = document.getElementById('screen');
+        const urlInput = document.getElementById('urlInput');
 
-        // 1. Backend se screen receive karna
-        socket.on('screen', (base64Image) => {
+        // 1. Screen Receive (Event name matched to Backend)
+        socket.on('cloud-screen', (base64Image) => {
             screen.src = 'data:image/jpeg;base64,' + base64Image;
         });
 
         // 2. Navigation
         function navigate() {
-            const url = document.getElementById('urlInput').value;
-            socket.emit('cloud-nav', url);
+            const url = urlInput.value;
+            if(url) socket.emit('cloud-nav', url);
         }
 
-        // 3. Mouse Click (Backend ke 'cloud-click' se match kiya)
+        // 3. Mouse Click (Dynamic calculation for any screen size)
         screen.addEventListener('click', (e) => {
             const rect = screen.getBoundingClientRect();
+            // Mapping browser click to 1280x720 backend resolution
             const x = Math.round((e.clientX - rect.left) * (1280 / rect.width));
             const y = Math.round((e.clientY - rect.top) * (720 / rect.height));
             socket.emit('cloud-click', { x, y });
@@ -54,15 +118,22 @@
 
         // 4. Keyboard
         window.addEventListener('keydown', (e) => {
-            if (document.activeElement.id !== 'urlInput') {
+            if (document.activeElement !== urlInput) {
                 socket.emit('cloud-key', e.key);
-                if(['Backspace', 'Tab', 'Enter'].includes(e.key)) e.preventDefault();
+                // Prevent scrolling with space/arrows while in browser
+                if(['ArrowUp', 'ArrowDown', 'Space', 'Backspace'].includes(e.code)) {
+                    e.preventDefault();
+                }
             }
         });
 
         function control(action) {
             socket.emit('cloud-control', action);
         }
+
+        // Connection status logs
+        socket.on('connect', () => console.log("Connected to Cloud Browser"));
+        socket.on('disconnect', () => console.log("Disconnected"));
     </script>
 </body>
 </html>
