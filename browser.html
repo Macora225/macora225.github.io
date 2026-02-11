@@ -135,5 +135,27 @@
         socket.on('connect', () => console.log("Connected to Cloud Browser"));
         socket.on('disconnect', () => console.log("Disconnected"));
     </script>
+    <div class="nav-icons">
+    <i class="fas fa-arrow-left" onclick="control('back')"></i>
+    <i class="fas fa-redo" onclick="control('reload')"></i>
+    <i class="fas fa-trash-alt" onclick="resetBrowser()" style="color: #ea4335;" title="Clear History & Restart"></i>
+</div>
+
+<script>
+    // Reset function
+    function resetBrowser() {
+        if(confirm("Kya aap saari history aur sessions delete karna chahte hain?")) {
+            document.getElementById('screen').style.opacity = "0.3"; // Visual feedback
+            socket.emit('cloud-reset');
+        }
+    }
+
+    // Reset hone ke baad screen wapis dikhayein
+    socket.on('browser-reset-done', () => {
+        alert("Browser Reset Successfully!");
+        document.getElementById('screen').style.opacity = "1";
+        document.getElementById('urlInput').value = "";
+    });
+</script>
 </body>
 </html>
