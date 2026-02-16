@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pro Image Resizer & Editor | YouTubeHelper</title>
 
+   <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9863GWKBRP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9863GWKBRP"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -13,6 +19,8 @@
       gtag('config', 'G-9863GWKBRP');
     </script>
 
+  gtag('config', 'G-9863GWKBRP');
+</script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9877532310172541" crossorigin="anonymous"></script>
 
     <script>
@@ -27,7 +35,7 @@
     l.parentNode.insertBefore(s, l);
     })({})
     </script>
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
@@ -99,7 +107,7 @@
 
         .control-group { margin-bottom: 25px; }
         label { display: block; font-size: 13px; margin-bottom: 10px; opacity: 0.7; }
-        
+
         .size-inputs { display: flex; gap: 10px; }
         .size-inputs input {
             width: 100%;
@@ -124,7 +132,7 @@
         .btn-download { background: var(--primary); color: #fff; }
 
         .seo-section { margin-top: 80px; line-height: 1.8; color: #94a3b8; }
-        
+
         .ad-banner { margin: 20px 0; text-align: center; }
 
         @media (max-width: 900px) {
@@ -182,6 +190,21 @@
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
 
+        <div class="ad-banner">
+            <script>
+            (function(zldqr){
+            var d = document,
+                s = d.createElement('script'),
+                l = d.scripts[d.scripts.length - 1];
+            s.settings = zldqr || {};
+            s.src = "\/\/piercing-flower.com\/bLXbV\/sKd.G-lm0QYdWgcS\/AetmK9-unZsUaltkmP-TsY\/3dNvTWAy0JMWznEntPN\/j\/cW1oMjDcQxzRM\/gZ";
+            s.async = true;
+            s.referrerPolicy = 'no-referrer-when-downgrade';
+            l.parentNode.insertBefore(s, l);
+            })({})
+            </script>
+        </div>
+
         <div class="editor-wrapper" id="editorWrapper">
             <div class="canvas-area">
                 <img id="imageToEdit" src="">
@@ -191,20 +214,7 @@
                 <div class="control-group">
                     <label>Resize Dimensions (px)</label>
                     <div class="size-inputs">
-                        <input type="number" id="widthInput" placeholder="Width">
-                        <input type="number" id="heightInput" placeholder="Height">
-                    </div>
-                </div>
-
-                <div style="margin-bottom: 20px;">
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-format="fluid"
-                         data-ad-layout-key="-ef+6k-30-ac+ty"
-                         data-ad-client="ca-pub-9877532310172541"
-                         data-ad-slot="4319121863"></ins>
-                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                </div>
+@@ -193,72 +213,84 @@
 
                 <div class="control-group">
                     <label>Quick Filters</label>
@@ -215,21 +225,29 @@
                         <option value="brightness(150%)">Bright</option>
                         <option value="contrast(150%)">High Contrast</option>
                     </select>
+                    <footer-select id="filterSelect" onchange="applyFilter()" style="display:block; width:100%; padding:10px; border-radius:8px; background:#222; color:white; border:1px solid var(--glass-border);">
+                        <select id="filterSelect" onchange="applyFilter()" style="width:100%; background:transparent; color:white; border:none; outline:none;">
+                            <option value="none">Original</option>
+                            <option value="grayscale(100%)">Grayscale</option>
+                            <option value="sepia(100%)">Sepia</option>
+                            <option value="brightness(150%)">Bright</option>
+                            <option value="contrast(150%)">High Contrast</option>
+                        </select>
+                    </footer-select>
                 </div>
 
                 <button class="btn-action btn-crop" onclick="enableCrop()">Enable/Disable Crop</button>
                 <button class="btn-action btn-download" onclick="downloadImage()">Download Final Image</button>
                 <p style="font-size: 11px; text-align:center; opacity:0.5;">*Crop before downloading for best results</p>
+                
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-format="fluid"
+                     data-ad-layout-key="-ef+6k-30-ac+ty"
+                     data-ad-client="ca-pub-9877532310172541"
+                     data-ad-slot="4319121863"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
             </div>
-        </div>
-
-        <div class="ad-banner">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-format="autorelaxed"
-                 data-ad-client="ca-pub-9877532310172541"
-                 data-ad-slot="1692958527"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
 
         <div class="seo-section">
@@ -243,6 +261,17 @@
             <p><strong>Instant Filters & Visual Enhancements:</strong> Sometimes an image just needs a little more pop. Our "Quick Filters" menu includes essentials like High Contrast, Sepia, and Brightness adjustments. These filters are applied using CSS-hardware acceleration, meaning you see the changes instantly without any lag. It's the perfect way to give your YouTube thumbnails or blog headers a consistent, professional look across your entire brand.</p>
 
             <p><strong>Privacy First - 100% Local Processing:</strong> At YouTubeHelper, we understand the importance of data security. Unlike other online editors that upload your private photos to their servers, our Image Studio works entirely within your browser. Your images never leave your computer. All the resizing, cropping, and filtering happens locally, providing you with maximum privacy and lightning-fast speed. Experience the future of private, professional image editing with YouTubeHelper today.</p>
+            <p>Welcome to <strong>YouTubeHelper's Image Edit Studio</strong>...</p>
+            
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-format="autorelaxed"
+                 data-ad-client="ca-pub-9877532310172541"
+                 data-ad-slot="1692958527"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+            <p>Our resizer allows you to manually input dimensions...</p>
+            <p>Experience the future of private, professional image editing with YouTubeHelper today.</p>
         </div>
     </div>
 
@@ -260,7 +289,7 @@
                     imgElement.src = event.target.result;
                     wrapper.style.display = 'grid';
                     document.getElementById('dropZone').style.display = 'none';
-                    
+
                     const tempImg = new Image();
                     tempImg.src = event.target.result;
                     tempImg.onload = function() {
@@ -268,7 +297,7 @@
                         document.getElementById('heightInput').value = this.height;
                     }
                 }
-                reader.readAsDataURL(file);
+                reader.readAsArrayBuffer(file);
             }
         });
 
@@ -286,10 +315,11 @@
 
         function applyFilter() {
             const filter = document.getElementById('filterSelect').value;
-            imgElement.style.filter = filter;
+@@ -266,30 +298,28 @@
         }
 
         function downloadImage() {
+            // Hilltop Direct Link Pop-under Simulation on Download
             window.open('https://actuallist.com/d.m/FzzKdTG/NEvSZ-GHUp/Zezma9/umZ/UQlhkyPoTKYw3RNnT/Aq0GNtDSMMtiNIj-cR1GMAD-Qz0WN/Av', '_blank');
 
             let canvas;
