@@ -182,21 +182,6 @@
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
 
-        <div class="ad-banner">
-            <script>
-            (function(zldqr){
-            var d = document,
-                s = d.createElement('script'),
-                l = d.scripts[d.scripts.length - 1];
-            s.settings = zldqr || {};
-            s.src = "\/\/piercing-flower.com\/bLXbV\/sKd.G-lm0QYdWgcS\/AetmK9-unZsUaltkmP-TsY\/3dNvTWAy0JMWznEntPN\/j\/cW1oMjDcQxzRM\/gZ";
-            s.async = true;
-            s.referrerPolicy = 'no-referrer-when-downgrade';
-            l.parentNode.insertBefore(s, l);
-            })({})
-            </script>
-        </div>
-
         <div class="editor-wrapper" id="editorWrapper">
             <div class="canvas-area">
                 <img id="imageToEdit" src="">
@@ -211,46 +196,53 @@
                     </div>
                 </div>
 
+                <div style="margin-bottom: 20px;">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-format="fluid"
+                         data-ad-layout-key="-ef+6k-30-ac+ty"
+                         data-ad-client="ca-pub-9877532310172541"
+                         data-ad-slot="4319121863"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </div>
+
                 <div class="control-group">
                     <label>Quick Filters</label>
-                    <footer-select id="filterSelect" onchange="applyFilter()" style="display:block; width:100%; padding:10px; border-radius:8px; background:#222; color:white; border:1px solid var(--glass-border);">
-                        <select id="filterSelect" onchange="applyFilter()" style="width:100%; background:transparent; color:white; border:none; outline:none;">
-                            <option value="none">Original</option>
-                            <option value="grayscale(100%)">Grayscale</option>
-                            <option value="sepia(100%)">Sepia</option>
-                            <option value="brightness(150%)">Bright</option>
-                            <option value="contrast(150%)">High Contrast</option>
-                        </select>
-                    </footer-select>
+                    <select id="filterSelect" onchange="applyFilter()" style="width:100%; padding:10px; border-radius:8px; background:#222; color:white; border:1px solid var(--glass-border);">
+                        <option value="none">Original</option>
+                        <option value="grayscale(100%)">Grayscale</option>
+                        <option value="sepia(100%)">Sepia</option>
+                        <option value="brightness(150%)">Bright</option>
+                        <option value="contrast(150%)">High Contrast</option>
+                    </select>
                 </div>
 
                 <button class="btn-action btn-crop" onclick="enableCrop()">Enable/Disable Crop</button>
                 <button class="btn-action btn-download" onclick="downloadImage()">Download Final Image</button>
                 <p style="font-size: 11px; text-align:center; opacity:0.5;">*Crop before downloading for best results</p>
-                
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-format="fluid"
-                     data-ad-layout-key="-ef+6k-30-ac+ty"
-                     data-ad-client="ca-pub-9877532310172541"
-                     data-ad-slot="4319121863"></ins>
-                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
             </div>
         </div>
 
-        <div class="seo-section">
-            <h2>Professional Image Resizing & Editing Without Quality Loss</h2>
-            <p>Welcome to <strong>YouTubeHelper's Image Edit Studio</strong>...</p>
-            
+        <div class="ad-banner">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-format="autorelaxed"
                  data-ad-client="ca-pub-9877532310172541"
                  data-ad-slot="1692958527"></ins>
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
 
-            <p>Our resizer allows you to manually input dimensions...</p>
-            <p>Experience the future of private, professional image editing with YouTubeHelper today.</p>
+        <div class="seo-section">
+            <h2>Professional Image Resizing & Editing Without Quality Loss</h2>
+            <p>Welcome to <strong>YouTubeHelper's Image Edit Studio</strong>, the most versatile browser-based image utility of 2026. Whether you are a YouTuber needing a specific thumbnail size, a blogger optimizing photos for faster load times, or a social media manager crafting the perfect Instagram post, our tool provides a high-performance solution. We've built this studio to eliminate the need for heavy software like Photoshop for everyday editing tasks.</p>
+
+            <p><strong>Advanced Resizing & Compression:</strong> Our resizer allows you to manually input dimensions in pixels, ensuring that your image fits perfectly wherever you plan to use it. But we don't just stretch pixels; our algorithm uses high-quality interpolation to maintain clarity even when downscaling. This is crucial for web performance, as properly resized images can significantly improve your website's SEO by reducing page weight and increasing load speed.</p>
+
+            <p><strong>Professional Cropping & Aspect Ratios:</strong> With our integrated <em>Cropper.js</em> engine, you get a fluid and intuitive cropping experience. You can easily remove unwanted borders or focus on a specific subject within your photo. The cropping tool works seamlessly on both desktop and mobile devices, providing a "Drag-and-Drop" interface that is as simple as it is powerful. Combined with our quick-apply filters, you can transform a raw photo into a polished asset in seconds.</p>
+
+            <p><strong>Instant Filters & Visual Enhancements:</strong> Sometimes an image just needs a little more pop. Our "Quick Filters" menu includes essentials like High Contrast, Sepia, and Brightness adjustments. These filters are applied using CSS-hardware acceleration, meaning you see the changes instantly without any lag. It's the perfect way to give your YouTube thumbnails or blog headers a consistent, professional look across your entire brand.</p>
+
+            <p><strong>Privacy First - 100% Local Processing:</strong> At YouTubeHelper, we understand the importance of data security. Unlike other online editors that upload your private photos to their servers, our Image Studio works entirely within your browser. Your images never leave your computer. All the resizing, cropping, and filtering happens locally, providing you with maximum privacy and lightning-fast speed. Experience the future of private, professional image editing with YouTubeHelper today.</p>
         </div>
     </div>
 
@@ -276,7 +268,7 @@
                         document.getElementById('heightInput').value = this.height;
                     }
                 }
-                reader.readAsArrayBuffer(file);
+                reader.readAsDataURL(file);
             }
         });
 
