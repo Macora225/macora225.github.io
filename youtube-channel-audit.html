@@ -7,8 +7,7 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9863GWKBRP"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9863GWKBRP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -43,7 +42,6 @@
 
         .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
 
-        /* --- Search Area --- */
         .search-card {
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
@@ -81,7 +79,6 @@
             cursor: pointer;
         }
 
-        /* --- Audit Results --- */
         .audit-results { display: none; animation: fadeIn 0.6s ease; }
 
         .channel-header {
@@ -114,7 +111,6 @@
         .stat-card h4 { margin: 0; opacity: 0.6; font-size: 14px; }
         .stat-card p { font-size: 24px; font-weight: 800; margin-top: 10px; color: var(--accent); }
 
-        /* --- Graphs --- */
         .chart-container {
             background: var(--glass-bg);
             padding: 30px;
@@ -123,7 +119,6 @@
             margin-bottom: 40px;
         }
 
-        /* --- Video Lists --- */
         .video-list-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -153,6 +148,8 @@
 
         .seo-text { margin-top: 100px; line-height: 1.8; color: #94a3b8; }
 
+        .ad-container { margin: 30px 0; text-align: center; overflow: hidden; }
+
         @media (max-width: 768px) {
             .stats-grid, .video-list-container { grid-template-columns: 1fr; }
             .input-group { flex-direction: column; }
@@ -167,6 +164,13 @@
     </header>
 
     <div class="container">
+
+        <div class="ad-container">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9877532310172541" crossorigin="anonymous"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9877532310172541" data-ad-slot="5946230003" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
         <div class="search-card">
             <h1>Advanced Channel Audit</h1>
             <p>Analyze any YouTube Channel's health, views, and video performance.</p>
@@ -174,6 +178,12 @@
                 <input type="text" id="channelInput" placeholder="Enter Channel URL or ID (e.g., @MrBeast)">
                 <button class="btn-audit" onclick="startAudit()">Start Audit</button>
             </div>
+        </div>
+
+        <div class="ad-container">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9877532310172541" crossorigin="anonymous"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9877532310172541" data-ad-slot="4232433908"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
 
         <div id="auditResults" class="audit-results">
@@ -189,6 +199,12 @@
                 <div class="stat-card"><h4>Total Subscribers</h4><p id="subCount">0</p></div>
                 <div class="stat-card"><h4>Total Lifetime Views</h4><p id="totalViews">0</p></div>
                 <div class="stat-card"><h4>Total Videos</h4><p id="videoCount">0</p></div>
+            </div>
+
+            <div class="ad-container">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9877532310172541" crossorigin="anonymous"></script>
+                <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-9877532310172541" data-ad-slot="7886831783"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
             </div>
 
             <div class="chart-container">
@@ -218,6 +234,13 @@
 
             <p><strong>In-Depth Metadata & Privacy:</strong> From lifetime subscriber counts to total video uploads, we provide all the core pillars of channel health in one place. YouTubeHelper's audit is designed to be fast, secure, and respectful of your privacy. We don't require you to link your Google account; all public data is fetched safely via official API channels. Use this audit to refine your SEO, improve your engagement, and dominate your niche today.</p>
         </div>
+
+        <div class="ad-container">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9877532310172541" crossorigin="anonymous"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-9877532310172541" data-ad-slot="9196985979"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
     </div>
 
     <script>
@@ -236,7 +259,7 @@
             if (API_KEY === 'YOUR_API_KEY_HERE') return alert("Please add your API Key in the code!");
 
             try {
-                // 1. Get Channel ID (handles handles like @username)
+                // 1. Get Channel ID
                 let chSearchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=${input}&key=${API_KEY}`;
                 let chRes = await fetch(chSearchUrl);
                 let chData = await chRes.json();
