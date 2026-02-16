@@ -5,12 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pro Image Resizer & Editor | YouTubeHelper</title>
 
-   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9863GWKBRP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9863GWKBRP"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -19,22 +13,7 @@
       gtag('config', 'G-9863GWKBRP');
     </script>
 
-  gtag('config', 'G-9863GWKBRP');
-</script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9877532310172541" crossorigin="anonymous"></script>
-
-    <script>
-    (function(cmxuze){
-    var d = document,
-        s = d.createElement('script'),
-        l = d.scripts[d.scripts.length - 1];
-    s.settings = cmxuze || {};
-    s.src = "\/\/piercing-flower.com\/bcX\/VXsJd.G_lV0aYeWdcc\/weRmg9qufZzUnlJk\/POT\/Y\/3VNmTeAK0LN\/j\/IIt\/NQjlc\/1tMNDsQ\/2lM\/wF";
-    s.async = true;
-    s.referrerPolicy = 'no-referrer-when-downgrade';
-    l.parentNode.insertBefore(s, l);
-    })({})
-    </script>
 
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
@@ -90,6 +69,7 @@
             border-radius: 20px;
             padding: 20px;
             border: 1px solid var(--glass-border);
+            min-height: 400px;
             max-height: 600px;
             display: flex;
             justify-content: center;
@@ -132,7 +112,6 @@
         .btn-download { background: var(--primary); color: #fff; }
 
         .seo-section { margin-top: 80px; line-height: 1.8; color: #94a3b8; }
-
         .ad-banner { margin: 20px 0; text-align: center; }
 
         @media (max-width: 900px) {
@@ -141,19 +120,6 @@
     </style>
 </head>
 <body>
-
-    <script>
-    (function(oycy){
-    var d = document,
-        s = d.createElement('script'),
-        l = d.scripts[d.scripts.length - 1];
-    s.settings = oycy || {};
-    s.src = "\/\/piercing-flower.com\/bmX.Vqs\/d\/Gala0bY\/Wrca\/oeImU9YuhZnUel-kwPeTbYX3eNxTGAi0tMXzzkZteNdj\/cJ1\/MsDuQu0RMbAO";
-    s.async = true;
-    s.referrerPolicy = 'no-referrer-when-downgrade';
-    l.parentNode.insertBefore(s, l);
-    })({})
-    </script>
 
     <header class="glass-header">
         <a href="index.html" style="color:var(--primary); text-decoration:none; font-weight:800; font-size:24px;">🚀 YouTubeHelper</a>
@@ -170,39 +136,10 @@
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
 
-        <div class="ad-banner">
-            <a href="https://actuallist.com/d.m/FzzKdTG/NEvSZ-GHUp/Zezma9/umZ/UQlhkyPoTKYw3RNnT/Aq0GNtDSMMtiNIj-cR1GMAD-Qz0WN/Av" target="_blank" style="color:var(--accent); text-decoration:none; font-weight:600;">[ High Speed Server Access ]</a>
-        </div>
-
         <div class="upload-card" id="dropZone" onclick="document.getElementById('fileInput').click()">
             <h2 style="margin:0;">📁 Click or Drag to Upload Image</h2>
             <p style="opacity: 0.6; margin-top: 10px;">Supports JPG, PNG, WEBP</p>
             <input type="file" id="fileInput" hidden accept="image/*">
-        </div>
-
-        <div class="ad-banner">
-            <ins class="adsbygoogle"
-                 style="display:block; text-align:center;"
-                 data-ad-layout="in-article"
-                 data-ad-format="fluid"
-                 data-ad-client="ca-pub-9877532310172541"
-                 data-ad-slot="2448578942"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-
-        <div class="ad-banner">
-            <script>
-            (function(zldqr){
-            var d = document,
-                s = d.createElement('script'),
-                l = d.scripts[d.scripts.length - 1];
-            s.settings = zldqr || {};
-            s.src = "\/\/piercing-flower.com\/bLXbV\/sKd.G-lm0QYdWgcS\/AetmK9-unZsUaltkmP-TsY\/3dNvTWAy0JMWznEntPN\/j\/cW1oMjDcQxzRM\/gZ";
-            s.async = true;
-            s.referrerPolicy = 'no-referrer-when-downgrade';
-            l.parentNode.insertBefore(s, l);
-            })({})
-            </script>
         </div>
 
         <div class="editor-wrapper" id="editorWrapper">
@@ -214,7 +151,10 @@
                 <div class="control-group">
                     <label>Resize Dimensions (px)</label>
                     <div class="size-inputs">
-@@ -193,72 +213,84 @@
+                        <input type="number" id="widthInput" placeholder="Width">
+                        <input type="number" id="heightInput" placeholder="Height">
+                    </div>
+                </div>
 
                 <div class="control-group">
                     <label>Quick Filters</label>
@@ -225,53 +165,33 @@
                         <option value="brightness(150%)">Bright</option>
                         <option value="contrast(150%)">High Contrast</option>
                     </select>
-                    <footer-select id="filterSelect" onchange="applyFilter()" style="display:block; width:100%; padding:10px; border-radius:8px; background:#222; color:white; border:1px solid var(--glass-border);">
-                        <select id="filterSelect" onchange="applyFilter()" style="width:100%; background:transparent; color:white; border:none; outline:none;">
-                            <option value="none">Original</option>
-                            <option value="grayscale(100%)">Grayscale</option>
-                            <option value="sepia(100%)">Sepia</option>
-                            <option value="brightness(150%)">Bright</option>
-                            <option value="contrast(150%)">High Contrast</option>
-                        </select>
-                    </footer-select>
                 </div>
 
                 <button class="btn-action btn-crop" onclick="enableCrop()">Enable/Disable Crop</button>
                 <button class="btn-action btn-download" onclick="downloadImage()">Download Final Image</button>
                 <p style="font-size: 11px; text-align:center; opacity:0.5;">*Crop before downloading for best results</p>
                 
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-format="fluid"
-                     data-ad-layout-key="-ef+6k-30-ac+ty"
-                     data-ad-client="ca-pub-9877532310172541"
-                     data-ad-slot="4319121863"></ins>
-                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                <div class="ad-banner">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-format="fluid"
+                         data-ad-layout-key="-ef+6k-30-ac+ty"
+                         data-ad-client="ca-pub-9877532310172541"
+                         data-ad-slot="4319121863"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </div>
             </div>
         </div>
 
         <div class="seo-section">
             <h2>Professional Image Resizing & Editing Without Quality Loss</h2>
-            <p>Welcome to <strong>YouTubeHelper's Image Edit Studio</strong>, the most versatile browser-based image utility of 2026. Whether you are a YouTuber needing a specific thumbnail size, a blogger optimizing photos for faster load times, or a social media manager crafting the perfect Instagram post, our tool provides a high-performance solution. We've built this studio to eliminate the need for heavy software like Photoshop for everyday editing tasks.</p>
+            <p>Welcome to <strong>YouTubeHelper's Image Edit Studio</strong>, the most versatile browser-based image utility of 2026. Whether you are a YouTuber needing a specific thumbnail size, a blogger optimizing photos for faster load times, or a social media manager crafting the perfect Instagram post, our tool provides a high-performance solution.</p>
 
-            <p><strong>Advanced Resizing & Compression:</strong> Our resizer allows you to manually input dimensions in pixels, ensuring that your image fits perfectly wherever you plan to use it. But we don't just stretch pixels; our algorithm uses high-quality interpolation to maintain clarity even when downscaling. This is crucial for web performance, as properly resized images can significantly improve your website's SEO by reducing page weight and increasing load speed.</p>
+            <p><strong>Advanced Resizing & Compression:</strong> Our resizer allows you to manually input dimensions in pixels, ensuring that your image fits perfectly. Our algorithm uses high-quality interpolation to maintain clarity even when downscaling.</p>
 
-            <p><strong>Professional Cropping & Aspect Ratios:</strong> With our integrated <em>Cropper.js</em> engine, you get a fluid and intuitive cropping experience. You can easily remove unwanted borders or focus on a specific subject within your photo. The cropping tool works seamlessly on both desktop and mobile devices, providing a "Drag-and-Drop" interface that is as simple as it is powerful. Combined with our quick-apply filters, you can transform a raw photo into a polished asset in seconds.</p>
+            <p><strong>Professional Cropping & Aspect Ratios:</strong> With our integrated <em>Cropper.js</em> engine, you get a fluid and intuitive cropping experience. The cropping tool works seamlessly on both desktop and mobile devices.</p>
 
-            <p><strong>Instant Filters & Visual Enhancements:</strong> Sometimes an image just needs a little more pop. Our "Quick Filters" menu includes essentials like High Contrast, Sepia, and Brightness adjustments. These filters are applied using CSS-hardware acceleration, meaning you see the changes instantly without any lag. It's the perfect way to give your YouTube thumbnails or blog headers a consistent, professional look across your entire brand.</p>
-
-            <p><strong>Privacy First - 100% Local Processing:</strong> At YouTubeHelper, we understand the importance of data security. Unlike other online editors that upload your private photos to their servers, our Image Studio works entirely within your browser. Your images never leave your computer. All the resizing, cropping, and filtering happens locally, providing you with maximum privacy and lightning-fast speed. Experience the future of private, professional image editing with YouTubeHelper today.</p>
-            <p>Welcome to <strong>YouTubeHelper's Image Edit Studio</strong>...</p>
-            
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-format="autorelaxed"
-                 data-ad-client="ca-pub-9877532310172541"
-                 data-ad-slot="1692958527"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-            <p>Our resizer allows you to manually input dimensions...</p>
-            <p>Experience the future of private, professional image editing with YouTubeHelper today.</p>
+            <p><strong>Privacy First - 100% Local Processing:</strong> At YouTubeHelper, we understand the importance of data security. Your images never leave your computer. All processing happens locally in your browser.</p>
         </div>
     </div>
 
@@ -279,6 +199,7 @@
         const fileInput = document.getElementById('fileInput');
         const imgElement = document.getElementById('imageToEdit');
         const wrapper = document.getElementById('editorWrapper');
+        const dropZone = document.getElementById('dropZone');
         let cropper = null;
 
         fileInput.addEventListener('change', function(e) {
@@ -288,7 +209,7 @@
                 reader.onload = function(event) {
                     imgElement.src = event.target.result;
                     wrapper.style.display = 'grid';
-                    document.getElementById('dropZone').style.display = 'none';
+                    dropZone.style.display = 'none';
 
                     const tempImg = new Image();
                     tempImg.src = event.target.result;
@@ -297,7 +218,7 @@
                         document.getElementById('heightInput').value = this.height;
                     }
                 }
-                reader.readAsArrayBuffer(file);
+                reader.readAsDataURL(file); // Fixed: Changed from readAsArrayBuffer
             }
         });
 
@@ -309,32 +230,36 @@
                 cropper = new Cropper(imgElement, {
                     viewMode: 1,
                     autoCropArea: 1,
+                    responsive: true
                 });
             }
         }
 
         function applyFilter() {
-            const filter = document.getElementById('filterSelect').value;
-@@ -266,30 +298,28 @@
+            const filterValue = document.getElementById('filterSelect').value;
+            imgElement.style.filter = filterValue;
         }
 
         function downloadImage() {
-            // Hilltop Direct Link Pop-under Simulation on Download
+            // Simulated pop-under (as per your original code)
             window.open('https://actuallist.com/d.m/FzzKdTG/NEvSZ-GHUp/Zezma9/umZ/UQlhkyPoTKYw3RNnT/Aq0GNtDSMMtiNIj-cR1GMAD-Qz0WN/Av', '_blank');
 
             let canvas;
+            const targetWidth = parseInt(document.getElementById('widthInput').value) || imgElement.naturalWidth;
+            const targetHeight = parseInt(document.getElementById('heightInput').value) || imgElement.naturalHeight;
+
             if (cropper) {
                 canvas = cropper.getCroppedCanvas({
-                    width: parseInt(document.getElementById('widthInput').value),
-                    height: parseInt(document.getElementById('heightInput').value)
+                    width: targetWidth,
+                    height: targetHeight
                 });
             } else {
                 canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
-                canvas.width = parseInt(document.getElementById('widthInput').value);
-                canvas.height = parseInt(document.getElementById('heightInput').value);
+                canvas.width = targetWidth;
+                canvas.height = targetHeight;
                 ctx.filter = imgElement.style.filter;
-                ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
+                ctx.drawImage(imgElement, 0, 0, targetWidth, targetHeight);
             }
 
             const link = document.createElement('a');
