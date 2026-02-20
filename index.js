@@ -823,7 +823,6 @@ app.get('/proxy-request', async (req, res) => {
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(StealthPlugin());
-const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 async function runGscTask(keyword, url, viewNumber) {
     // CPC DATABASE
     const DATABASE = {
