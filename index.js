@@ -823,32 +823,52 @@ app.get('/proxy-request', async (req, res) => {
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(StealthPlugin());
+const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 async function runGscTask(keyword, url, viewNumber) {
+    // CPC DATABASE
+    const DATABASE = {
+        crypto: ['https://www.binance.com/en-IN/blog/markets/7744511595520285761', 'https://www.binance.com/en-IN/blog/all/7318383218004275432'],
+        insurance: ['https://www.policybazaar.com/', 'https://www.insurancejournal.com/'],
+        trade: ['https://www.investing.com/academy/trading/', 'https://licindia.in/press-release']
+    };
+
     let browser;
     try {
         browser = await puppeteer.launch({
             headless: "new",
-            args: [
-                '--no-sandbox', 
-                '--disable-setuid-sandbox', 
-                '--disable-dev-shm-usage',
-                '--disable-gpu',
-                '--disable-blink-features=AutomationControlled'
-            ]
+            args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu', '--disable-blink-features=AutomationControlled']
         });
 
         const page = await browser.newPage();
-        await page.setViewport({ width: 1366, height: 768 });
         
-        // Anti-Bot: Set Random User Agent
-        await page.setUserAgent(USER_AGENTS[Math.floor(Math.random() * USER_AGENTS.length)]);
+        // 🔄 Profile setup (Using your randomInt and profiles)
+        const profile = ADVANCED_DEVICE_PROFILES[Math.floor(Math.random() * ADVANCED_DEVICE_PROFILES.length)];
+        await page.setViewport(profile.view);
+        await page.setUserAgent(profile.ua);
+
+        // --- 🟢 NEW STAGE: WARM-UP (History Building) ---
+        const topics = Object.keys(DATABASE);
+        const selectedTopic = topics[Math.floor(Math.random() * topics.length)];
+        const warmupLinks = DATABASE[selectedTopic];
+
+        console.log(`[WARM-UP] Interest: ${selectedTopic}`);
+        for (const link of warmupLinks) {
+            await page.goto(link, { waitUntil: 'domcontentloaded', timeout: 60000 });
+            // 30-35s stay per warmup link
+            const endWarmup = Date.now() + randomInt(30000, 35000);
+            while (Date.now() < endWarmup) {
+                await page.evaluate(() => window.scrollBy(0, Math.floor(Math.random() * 400)));
+                await new Promise(r => setTimeout(r, randomInt(3000, 5000)));
+            }
+        }
+        // --- WARM-UP END ---
 
         // 1. STAGE: Google Search Simulation (Organic Entry)
         const googleUrl = `https://www.google.com/search?q=${encodeURIComponent(keyword)}`;
         await page.goto(googleUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
-        await new Promise(r => setTimeout(r, 3000)); 
+        await new Promise(r => setTimeout(r, randomInt(3000, 5000))); 
 
-        // 2. STAGE: Visit Target Site (30-35s Total Stay)
+        // 2. STAGE: Visit Target Site
         console.log(`[EARNING-MODE] View #${viewNumber} | URL: ${url} | Staying 35s...`);
         await page.goto(url, { 
             waitUntil: 'networkidle2', 
@@ -861,28 +881,20 @@ async function runGscTask(keyword, url, viewNumber) {
 
         // 3. STAGE: Realistic Behavior & Ad-Clicker Loop
         while (Date.now() - startTime < targetStayTime) {
-            // Natural Scrolling
             const dist = randomInt(300, 600);
             await page.evaluate((d) => window.scrollBy(0, d), dist);
-            
-            // Mouse Movement (Bypass Bot Checks)
             await page.mouse.move(randomInt(100, 800), randomInt(100, 600), { steps: 10 });
             await new Promise(r => setTimeout(r, randomInt(3000, 5000)));
 
-            // 🔥 HIGH-VALUE AD CLICKER (18% Probability)
             if (Math.random() < 0.18) { 
                 const ads = await page.$$('ins.adsbygoogle, iframe[id^="aswift"], iframe[src*="googleads"]');
                 if (ads.length > 0) {
                     const targetAd = ads[Math.floor(Math.random() * ads.length)];
                     const box = await targetAd.boundingBox();
-
                     if (box && box.width > 50 && box.height > 50) {
-                        console.log(`\x1b[42m%s\x1b[0m`, `[AD-CLICK] Target Found! Clicking...`);
+                        console.log(`\x1b[42m%s\x1b[0m`, `[AD-CLICK] Target Found!`);
                         await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2, { steps: 15 });
                         await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
-                        console.log(`\x1b[44m%s\x1b[0m`, `[SUCCESS] Ad Clicked! ✅ Revenue Generated.`);
-                        
-                        // Advertiser site par 15s wait (Necessary for valid CTR)
                         await new Promise(r => setTimeout(r, 15000));
                         break; 
                     }
