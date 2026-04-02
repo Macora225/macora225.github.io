@@ -1,10 +1,9 @@
-// =================================================================
+// ==========================================================
 // index.js (ULTIMATE FINAL VERSION - Part 1/2)
-// =============================================================
-
+// ===========================================================
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 // --- Imports (Node.js Modules) ---
 const express = require('express');
-const { GoogleGenAI } = require('@google/genai'); 
 const nodeFetch = require('node-fetch'); 
 const cors = require('cors'); 
 const fs = require('fs'); 
@@ -14,6 +13,9 @@ const { HttpsProxyAgent } = require('https-proxy-agent');
 // NEW: Import 'http' for non-authenticated proxies, needed for Tool 4
 const http = require('http'); 
 const { URL } = require('url'); // Added URL import
+
+let globalQueue = []; // Sabhi requests yahan jama hongi
+let isWorkerRunning = false;
 
 const app = express();
 const PORT = process.env.PORT || 10000; 
@@ -27,15 +29,24 @@ try {
     // Fallback to environment variables
     GEMINI_KEY = process.env.GEMINI_API_KEY || process.env.GEMINI_KEY; 
 }
-
+// --- DYNAMIC IMPORT FIX ---
 let ai;
-if (GEMINI_KEY) {
-    ai = new GoogleGenAI({ apiKey: GEMINI_KEY });
-} else {
-    // Fallback in case AI key is missing
-    ai = { models: { generateContent: () => Promise.reject(new Error("AI Key Missing")) } };
-}
+(async () => {
+    try {
+        // Hum yahan dynamic import use kar rahe hain taaki ESM error na aaye
+        const { GoogleGenAI } = await import('@google/genai');
 
+if (GEMINI_KEY) {
+            ai = new GoogleGenAI(GEMINI_KEY); // Note: Sirf GEMINI_KEY pass karein ya {apiKey: GEMINI_KEY}
+            console.log("✅ Gemini AI Initialized Successfully");
+        } else {
+            console.error("❌ AI Key Missing");
+            ai = { getGenerativeModel: () => ({ generateContent: () => Promise.reject("AI Key Missing") }) };
+        }
+    } catch (err) {
+        console.error("Failed to load GoogleGenAI:", err);
+    }
+})();
 // --- MIDDLEWARE & UTILITIES ---
 // Updated CORS to allow all for simplicity in deployment
 app.use(cors({
